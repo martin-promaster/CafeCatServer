@@ -26,6 +26,7 @@ public class WelcomePageAction extends ActionBase implements IService {
         response.setContentType("text/html");
         try {
             response.setMessageBody(sbResponseMessage.toString().getBytes("UTF-8"));
+            response.setSuccessMessage();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

@@ -8,6 +8,7 @@ public class HttpResponse {
     private String contentType;
     private int contentLength;
     private String statusCode;
+    ByteArrayOutputStream out = new ByteArrayOutputStream();
 
     private byte[] messageBody;
 
@@ -45,17 +46,15 @@ public class HttpResponse {
 
 
     // Return byte array of response message.
-    public byte[] getSuccessMessage() {
-        return getResponseMessage(200);
+    public void setSuccessMessage() {
+        setResponseMessage(200);
     }
 
-    public byte[] getFileNotFoundMessage() {
-        return getResponseMessage(404);
+    public void setFileNotFoundMessage() {
+        setResponseMessage(404);
     }
 
-    public byte[] getResponseMessage(int statusCode) {
-
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
+    public void setResponseMessage(int statusCode) {
 
         try {
             setContentLength(getMessageBody().length);
@@ -73,7 +72,9 @@ public class HttpResponse {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public byte[] getResponseMessage() {
         return out.toByteArray();
     }
 

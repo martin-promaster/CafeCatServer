@@ -44,7 +44,7 @@ public class DefaultAction extends ActionBase implements IService {
             }
 
             response.setMessageBody(out.toByteArray());
-
+            response.setSuccessMessage();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
