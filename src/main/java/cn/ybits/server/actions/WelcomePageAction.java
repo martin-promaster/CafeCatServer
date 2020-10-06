@@ -15,19 +15,17 @@ public class WelcomePageAction extends ActionBase implements IService {
 
         StringBuffer sbResponseMessage = new StringBuffer();
 
-        Date nowTime = new Date(System.currentTimeMillis());
-        SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyy-MM-dd HH:MM:ss:SS");
-        String retStrFormatNowDate = sdFormatter.format(nowTime);
+        Date current = new Date(System.currentTimeMillis());
+        String retStrFormatNowDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(current);
 
-        sbResponseMessage.append("Hello, welcome use CafeCatServer. This is a light web server.<br>" +
-                "Now time is: " + retStrFormatNowDate +
-                "<br>This is a default page. Please contact administrator of this web site." +
-                "<br><br><br>Copyright(C)2020, @ybits, allrights reserved.");
+        sbResponseMessage.append("Hello, welcome use CafeCatServer. This is a light web server.<br>" + "Now time is: ")
+                .append(retStrFormatNowDate)
+                .append("<br>This is a default page. Please contact administrator of this web site.")
+                .append("<br><br><br>Copyright(C)2020, @ybits, allrights reserved.");
 
         response.setContentType("text/html");
         try {
             response.setMessageBody(sbResponseMessage.toString().getBytes("UTF-8"));
-
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

@@ -18,8 +18,7 @@ public class DefaultAction extends ActionBase implements IService {
 
         String WEB_APP_PATH = WWEB_ROOT + WEB_APP;
 
-
-        FileInputStream in = null;
+        FileInputStream in;
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         byte[] buf = new byte[1];

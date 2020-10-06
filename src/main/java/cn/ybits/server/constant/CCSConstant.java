@@ -1,6 +1,6 @@
-package cn.ybits.server;
+package cn.ybits.server.constant;
 
-public class ServerConstant {
+public class CCSConstant {
     public static final String CR = "\r";
     public static final String LF = "\n";
 

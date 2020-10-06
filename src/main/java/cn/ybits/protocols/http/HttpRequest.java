@@ -1,6 +1,6 @@
 package cn.ybits.protocols.http;
 
-import cn.ybits.server.ServerConstant;
+import cn.ybits.server.CCSConstant;
 
 public class HttpRequest {
 
@@ -73,11 +73,11 @@ public class HttpRequest {
 
     public String toString() {
 
-        return ServerConstant.CRLF
-                + "Method: "+ getMethod() + ServerConstant.CRLF
-                + "Path: " + getPath() + ServerConstant.CRLF
-                + "Parameters: "+ getParameters() + ServerConstant.CRLF
-                + "Version: " + getHttpVersion() + ServerConstant.CRLF;
+        return CCSConstant.CRLF
+                + "Method: "+ getMethod() + CCSConstant.CRLF
+                + "Path: " + getPath() + CCSConstant.CRLF
+                + "Parameters: "+ getParameters() + CCSConstant.CRLF
+                + "Version: " + getHttpVersion() + CCSConstant.CRLF;
     }
 
     public String getParameters() {
