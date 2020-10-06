@@ -75,7 +75,7 @@ public class CCSThread implements  Runnable  {
 
             // response message
             OutputStream out = socket.getOutputStream();
-            out.write(response.getResponseMessage());
+            out.write(response.getSuccessMessage());
 
         } catch (IOException e) {
             e.printStackTrace();
