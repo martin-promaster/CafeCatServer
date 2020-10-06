@@ -1,6 +1,6 @@
 package cn.ybits.protocols.http;
 
-import cn.ybits.server.CCSConstant;
+import cn.ybits.server.constant.CCSConstant;
 
 public class HttpRequest {
 

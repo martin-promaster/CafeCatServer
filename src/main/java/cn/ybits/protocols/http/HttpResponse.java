@@ -7,8 +7,17 @@ public class HttpResponse {
 
     private String contentType;
     private int contentLength;
+    private String statusCode;
 
     private byte[] messageBody;
+
+    public String getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(int statusCode) {
+        this.statusCode = String.valueOf(statusCode);
+    }
 
     public String getContentType() {
         return contentType;
@@ -36,15 +45,24 @@ public class HttpResponse {
 
 
     // Return byte array of response message.
-    public byte[] getResponseMessage() {
+    public byte[] getSuccessMessage() {
+        return getResponseMessage(200);
+    }
+
+    public byte[] getFileNotFoundMessage() {
+        return getResponseMessage(404);
+    }
+
+    public byte[] getResponseMessage(int statusCode) {
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         try {
             setContentLength(getMessageBody().length);
+            setStatusCode(statusCode);
 
-            String responseHeader = "HTTP/1.1 200 OK\r\n" +
-                    "Server: Cafecat Server 0.9\r\n" +
+            String responseHeader = "HTTP/1.1 "+ getStatusCode() +" OK\r\n" +
+                    "Server: Cafe Cat Server 0.9\r\n" +
                     "Content-Type: "+ getContentType() +"\r\n" +
                     "Content-Length: "+ getContentLength() +"\r\n\r\n";
 
