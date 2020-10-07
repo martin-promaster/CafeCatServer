@@ -29,7 +29,7 @@ public class DefaultDispatcher {
         // Loading class
         try {
 
-            Class clazz = Class.forName(clazzName);
+            Class<?> clazz = Class.forName(clazzName);
 
             IService defaultService = (IService)clazz.newInstance();
 
