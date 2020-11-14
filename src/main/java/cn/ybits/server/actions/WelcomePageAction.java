@@ -13,7 +13,7 @@ public class WelcomePageAction extends ActionBase implements IService {
 
     public void doAction(HttpRequest request, HttpResponse response) {
 
-        StringBuffer sbResponseMessage = new StringBuffer();
+        StringBuilder sbResponseMessage = new StringBuilder();
 
         Date current = new Date(System.currentTimeMillis());
         String retStrFormatNowDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(current);
