@@ -16,7 +16,7 @@ public class CCSBootstrap {
 
     final static ArrayBlockingQueue<Runnable> arryBlockingQueue = new ArrayBlockingQueue<Runnable>(50);
 
-    private ThreadPoolExecutor tpe;
+    private final ThreadPoolExecutor tpe;
 
 
     public CCSBootstrap() {
@@ -41,7 +41,7 @@ public class CCSBootstrap {
                 final Socket socket = serverSocket.accept();
 
                 log.debug("Connection is established at: " + socket.getInetAddress());
-                log.debug("Begin to process client request from: "+ socket.getRemoteSocketAddress());
+                log.debug("Processing client request from: "+ socket.getRemoteSocketAddress());
 
                 tpe.execute(new CCSThread(socket));
 

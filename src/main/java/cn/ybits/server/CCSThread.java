@@ -12,7 +12,7 @@ public class CCSThread implements  Runnable  {
 
     public static final Logger log = Logger.getLogger(CCSThread.class);
 
-    private Socket socket;
+    private final Socket socket;
 
     public CCSThread(Socket socket) {
         this.socket = socket;
@@ -32,7 +32,7 @@ public class CCSThread implements  Runnable  {
                 String lineMessage = br.readLine();
                 log.debug(lineMessage);
 
-                if (lineMessage.indexOf("HTTP/1.1") > -1) {
+                if (lineMessage.contains("HTTP/1.1")) {
 
                     String[] arr = lineMessage.split(" ");
 
@@ -44,13 +44,13 @@ public class CCSThread implements  Runnable  {
 
                 }
 
-                if (lineMessage.indexOf("Content-Length") > -1) {
+                if (lineMessage.contains("Content-Length")) {
 
-                    request.setContentLength(Integer.valueOf(lineMessage.split(":")[1].trim()));
+                    request.setContentLength(Integer.parseInt(lineMessage.split(":")[1].trim()));
 
                 }
 
-                if(lineMessage.equals("") && lineMessage.length() == 0) {
+                if(lineMessage.equals("")) {
 
                     if (request.getMethod().equals("POST") && request.getContentLength() > 0) {
 

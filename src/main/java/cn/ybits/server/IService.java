@@ -5,6 +5,6 @@ import cn.ybits.protocols.http.HttpResponse;
 
 public interface IService {
 
-    public void doAction(HttpRequest request, HttpResponse response);
+    void doAction(HttpRequest request, HttpResponse response);
 
 }
