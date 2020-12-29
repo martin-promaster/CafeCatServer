@@ -8,6 +8,7 @@ public class HttpResponse {
     private String contentType;
     private int contentLength;
     private String statusCode;
+
     ByteArrayOutputStream out = new ByteArrayOutputStream();
 
     private byte[] messageBody;
