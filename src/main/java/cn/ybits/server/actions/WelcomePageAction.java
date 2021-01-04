@@ -18,10 +18,10 @@ public class WelcomePageAction extends ActionBase implements IService {
         Date current = new Date(System.currentTimeMillis());
         String retStrFormatNowDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(current);
 
-        sbResponseMessage.append("Hello, welcome use CafeCatServer. This is a light web server.<br>" + "Now time is: ")
+        sbResponseMessage.append("<h1>Hello, welcome use CafeCatServer. </h1>This is a light-weight web server.<br>" + "Now time is: ")
                 .append(retStrFormatNowDate)
-                .append("<br>This is a default page. Please contact administrator of this web site.")
-                .append("<br><br><br>Copyright(C)2020, @ybits, allrights reserved.");
+                .append("<h3>This is a default page, please contact administrator of this web site.</h3>")
+                .append("Copyright (C) 2021, @YBITS, All rights reserved.");
 
         response.setContentType("text/html");
         try {
