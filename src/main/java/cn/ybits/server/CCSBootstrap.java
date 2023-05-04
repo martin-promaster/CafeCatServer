@@ -14,15 +14,13 @@ public class CCSBootstrap {
 
     public static final Logger log = Logger.getLogger(CCSBootstrap.class);
 
-    final static ArrayBlockingQueue<Runnable> arryBlockingQueue = new ArrayBlockingQueue<Runnable>(50);
+    final static ArrayBlockingQueue<Runnable> arrayBlockingQueue = new ArrayBlockingQueue<Runnable>(50);
 
     private final ThreadPoolExecutor tpe;
 
-
     public CCSBootstrap() {
-
         tpe = new ThreadPoolExecutor(100, 100, 200,
-                TimeUnit.MINUTES,	arryBlockingQueue);
+                TimeUnit.MINUTES, arrayBlockingQueue);
     }
 
     public void startServer() {
@@ -30,9 +28,8 @@ public class CCSBootstrap {
         int port = 8081;
 
         try {
-
             ServerSocket serverSocket = new ServerSocket(port, 200);
-            log.debug("CafeCatServer started successfully.");
+            log.debug("CafeCat Server started successfully.");
 
             while (true) {
 
@@ -44,18 +41,14 @@ public class CCSBootstrap {
                 log.debug("Processing client request from: "+ socket.getRemoteSocketAddress());
 
                 tpe.execute(new CCSThread(socket));
-
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public static void main(String[] argv) {
-
         CCSBootstrap ccs = new CCSBootstrap();
         ccs.startServer();
-
     }
 }

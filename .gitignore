@@ -48,6 +48,7 @@ out/
 .idea/
 target/
 webroot/
+webroot/**/plugins/**
 logs/
 
 # mpeltonen/sbt-idea plugin

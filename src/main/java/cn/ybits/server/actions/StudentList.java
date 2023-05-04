@@ -13,6 +13,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class StudentList extends ActionBase implements IService {
@@ -40,15 +41,20 @@ public class StudentList extends ActionBase implements IService {
                 studentList.add(student);
             }
 
-            if (!term.equals("")) {
+            if (term.isEmpty()) {
+                jResult.put("results", studentList);
+            } else {
+                List<Student> students2 = new ArrayList<Student>();
                 for (Student s : studentList) {
-                    if (!s.getText().equals(term)) {
-                        studentList.remove(s);
+                    if (s.getText().contains(term)) {
+                        students2.add(s);
                     }
                 }
+                jResult.put("results", students2);
             }
 
-            jResult.put("results", studentList);
+
+            jResult.put("pagination", JSONObject.parseObject("{\"more\": false}"));
 
             out.write(jResult.toJSONString().getBytes());
         } catch (IOException e) {

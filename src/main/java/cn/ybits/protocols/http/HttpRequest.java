@@ -72,7 +72,6 @@ public class HttpRequest {
     }
 
     public String toString() {
-
         return CCSConstant.CRLF
                 + "Method: "+ getMethod() + CCSConstant.CRLF
                 + "Path: " + getPath() + CCSConstant.CRLF
