@@ -7,13 +7,24 @@
     <groupId>cn.ybits</groupId>
     <artifactId>CafeCatServer</artifactId>
     <version>1.0-SNAPSHOT</version>
-
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/log4j/log4j -->
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.22</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>2.0.13</version>
         </dependency>
 
     </dependencies>

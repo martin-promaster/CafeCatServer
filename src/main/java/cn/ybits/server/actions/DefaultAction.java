@@ -13,20 +13,18 @@ public class DefaultAction extends ActionBase implements IService {
 
     public void doAction(HttpRequest request, HttpResponse response) {
 
-        String WWEB_ROOT = CCSContext.getInstance().getUserProfile() + "\\webroot\\";
-        String WEB_APP = "AdminLTE-2.4.5";
-
-        String WEB_APP_PATH = WWEB_ROOT + WEB_APP;
+        String WEB_APP_PATH = WEB_ROOT + WEB_APP;
 
         FileInputStream in;
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-        byte[] buf = new byte[1];
+        byte[] buf = new byte[1024];
         try {
             in = new FileInputStream(WEB_APP_PATH+request.getPath());
 
-            while(in.read(buf) > 0) {
-                out.write(buf);
+            int rt = -1;
+            while((rt = in.read(buf)) > 0) {
+                out.write(buf, 0, rt);
             }
 
             response.setContentType("text/html");
