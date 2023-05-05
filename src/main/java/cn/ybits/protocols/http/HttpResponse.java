@@ -1,5 +1,7 @@
 package cn.ybits.protocols.http;
 
+import com.sun.istack.internal.NotNull;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -8,15 +10,12 @@ public class HttpResponse {
     private String contentType;
     private int contentLength;
     private String statusCode;
-
     ByteArrayOutputStream out = new ByteArrayOutputStream();
-
     private byte[] messageBody;
 
     public String getStatusCode() {
         return statusCode;
     }
-
     public void setStatusCode(int statusCode) {
         this.statusCode = String.valueOf(statusCode);
     }
@@ -24,7 +23,6 @@ public class HttpResponse {
     public String getContentType() {
         return contentType;
     }
-
     public void setContentType(String contentType) {
         this.contentType = contentType;
     }
@@ -32,33 +30,28 @@ public class HttpResponse {
     public int getContentLength() {
         return contentLength;
     }
-
     public void setContentLength(int contentLength) {
         this.contentLength = contentLength;
     }
 
-    public byte[] getMessageBody() {
+    public byte[] getPayload() {
         return messageBody;
     }
-
-    public void setMessageBody(byte[] messageBody) {
-        this.messageBody = messageBody;
+    public void setPayload(@NotNull byte[] b) {
+        this.messageBody = b;
     }
-
 
     // Return byte array of response message.
     public void setSuccessMessage() {
         setResponseMessage(200);
     }
-
     public void setFileNotFoundMessage() {
         setResponseMessage(404);
     }
 
     public void setResponseMessage(int statusCode) {
-
         try {
-            setContentLength(getMessageBody().length);
+            setContentLength(getPayload().length);
             setStatusCode(statusCode);
 
             String responseHeader = "HTTP/1.1 "+ getStatusCode() +" OK\r\n" +
@@ -67,8 +60,7 @@ public class HttpResponse {
                     "Content-Length: "+ getContentLength() +"\r\n\r\n";
 
             out.write(responseHeader.getBytes("UTF-8"));
-
-            out.write(getMessageBody());
+            out.write(getPayload());
 
         } catch (IOException e) {
             e.printStackTrace();

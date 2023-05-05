@@ -41,7 +41,7 @@ public class DefaultAction extends ActionBase implements IService {
                 response.setContentType("application/x-font-truetype");
             }
 
-            response.setMessageBody(out.toByteArray());
+            response.setPayload(out.toByteArray());
             response.setSuccessMessage();
         } catch (FileNotFoundException e) {
             e.printStackTrace();

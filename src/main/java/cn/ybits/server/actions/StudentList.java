@@ -28,41 +28,34 @@ public class StudentList extends ActionBase implements IService {
             }
         }
 
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        JSONObject jResult = new JSONObject();
 
-        try {
-            JSONObject jResult = new JSONObject();
-
-            List<Student> studentList = new ArrayList<Student>();
-            for (int i = 0; i < 20; i++) {
-                Student student = new Student();
-                student.setId("898w74982387489823"+i);
-                student.setText("同学"+i);
-                studentList.add(student);
-            }
-
-            if (term.isEmpty()) {
-                jResult.put("results", studentList);
-            } else {
-                List<Student> students2 = new ArrayList<Student>();
-                for (Student s : studentList) {
-                    if (s.getText().contains(term)) {
-                        students2.add(s);
-                    }
-                }
-                jResult.put("results", students2);
-            }
-
-
-            jResult.put("pagination", JSONObject.parseObject("{\"more\": false}"));
-
-            out.write(jResult.toJSONString().getBytes());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        List<Student> studentList = new ArrayList<Student>();
+        for (int i = 0; i < 20; i++) {
+            Student student = new Student();
+            student.setId("898w74982387489823"+i);
+            student.setText("同学"+i);
+            studentList.add(student);
         }
 
+        if (term.isEmpty()) {
+            jResult.put("results", studentList);
+        } else {
+            List<Student> students2 = new ArrayList<Student>();
+            for (Student s : studentList) {
+                if (s.getText().contains(term)) {
+                    students2.add(s);
+                }
+            }
+            jResult.put("results", students2);
+        }
+
+
+        jResult.put("pagination", JSONObject.parseObject("{\"more\": false}"));
+
+        response.setPayload(jResult.toJSONString().getBytes());
+
         response.setContentType("text/json");
-        response.setMessageBody(out.toByteArray());
         response.setSuccessMessage();
     }
 }
