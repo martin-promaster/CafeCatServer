@@ -3,14 +3,14 @@ package cn.ybits.server;
 import cn.ybits.protocols.http.HttpRequest;
 import cn.ybits.protocols.http.HttpResponse;
 import cn.ybits.server.dispatcher.DefaultDispatcher;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import java.io.*;
 import java.net.Socket;
 
 public class CCSThread implements  Runnable  {
 
-    public static final Logger log = Logger.getLogger(CCSThread.class);
+    private final static Logger log = LogManager.getLogger(CCSThread.class);
 
     private final Socket socket;
 

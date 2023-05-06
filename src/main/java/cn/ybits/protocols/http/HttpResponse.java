@@ -1,7 +1,5 @@
 package cn.ybits.protocols.http;
 
-import com.sun.istack.internal.NotNull;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -37,7 +35,7 @@ public class HttpResponse {
     public byte[] getPayload() {
         return messageBody;
     }
-    public void setPayload(@NotNull byte[] b) {
+    public void setPayload(byte[] b) {
         this.messageBody = b;
     }
 

@@ -1,6 +1,6 @@
 package cn.ybits.server;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CCSBootstrap {
 
-    public static final Logger log = Logger.getLogger(CCSBootstrap.class);
+    public static final Logger log = LogManager.getLogger(CCSBootstrap.class);
 
     final static ArrayBlockingQueue<Runnable> arrayBlockingQueue = new ArrayBlockingQueue<Runnable>(50);
 
