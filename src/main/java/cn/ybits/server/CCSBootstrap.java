@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CCSBootstrap {
 
-    public static final Logger log = LogManager.getLogger(CCSBootstrap.class);
+    protected static final Logger log = LogManager.getLogger();
 
     final static ArrayBlockingQueue<Runnable> arrayBlockingQueue = new ArrayBlockingQueue<Runnable>(50);
 
