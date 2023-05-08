@@ -19,7 +19,7 @@ public class DefaultDispatcher {
         Map<String, String> actionMap = new HashMap<String, String>();
 
         actionMap.put("/",                      "cn.ybits.server.actions.WelcomePageAction");
-        actionMap.put("/apply/dinner/list",     "cn.ybits.server.actions.ApplyDinnerList");
+        actionMap.put("/apply/dinner/list",     "cn.ybits.server.actions.DailyDinnerMgr");
         actionMap.put("/apply/student/list",    "cn.ybits.server.actions.StudentQueryMgr");
 
         System.out.println(request.getPath());

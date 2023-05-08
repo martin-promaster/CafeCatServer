@@ -1,4 +1,4 @@
-﻿package cn.ybits.server.actions;
+package cn.ybits.server.actions;
 
 import cn.ybits.protocols.http.HttpRequest;
 import cn.ybits.protocols.http.HttpResponse;
@@ -10,10 +10,9 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.util.Date;
 
-public class ApplyDinnerList extends ActionBase implements IService {
-
+public class DailyDinnerMgr extends ActionBase implements IService {
+    @Override
     public void doAction(HttpRequest request, HttpResponse response) {
-
         JSONObject jsonData = new JSONObject();
 
         JSONArray jsonArray = new JSONArray();
