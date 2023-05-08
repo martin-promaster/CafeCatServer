@@ -1,4 +1,4 @@
-package cn.ybits.server.actions;
+﻿package cn.ybits.server.actions;
 
 import cn.ybits.protocols.http.HttpRequest;
 import cn.ybits.protocols.http.HttpResponse;
@@ -8,8 +8,6 @@ import cn.ybits.server.vo.LeaveApplication;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.Date;
 
 public class ApplyDinnerList extends ActionBase implements IService {
@@ -24,10 +22,10 @@ public class ApplyDinnerList extends ActionBase implements IService {
         for (int i = 0; i < 20; i++) {
             LeaveApplication leaveApplication = new LeaveApplication();
             leaveApplication.setId("898w74982387489823"+i);
-            leaveApplication.setName("同学a");
+            leaveApplication.setName("同学");
             leaveApplication.setLeaveType("晚自习请假");
             leaveApplication.setLeaveDate(new Date("2023/05/01"));
-            leaveApplication.setStatus("已确认");
+            leaveApplication.setStatus("已审批");
             jsonArray.add(JSONObject.toJSON(leaveApplication));
         }
 
@@ -35,7 +33,7 @@ public class ApplyDinnerList extends ActionBase implements IService {
 
         response.setPayload(jsonData.toJSONString().getBytes());
 
-        response.setContentType("text/json");
+        response.setContentType("text/json; charset=UTF-8");
         response.setSuccessMessage();
     }
 }

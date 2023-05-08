@@ -20,7 +20,7 @@ public class DefaultDispatcher {
 
         actionMap.put("/",                      "cn.ybits.server.actions.WelcomePageAction");
         actionMap.put("/apply/dinner/list",     "cn.ybits.server.actions.ApplyDinnerList");
-        actionMap.put("/apply/student/list",    "cn.ybits.server.actions.StudentList");
+        actionMap.put("/apply/student/list",    "cn.ybits.server.actions.StudentQueryMgr");
 
         System.out.println(request.getPath());
 

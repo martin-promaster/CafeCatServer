@@ -32,7 +32,7 @@ public class CCSThread implements  Runnable  {
                 String lineMessage = br.readLine();
                 log.debug(lineMessage);
 
-                if (lineMessage.contains("HTTP/1.1")) {
+                if (lineMessage.contains("HTTP/1.0") || lineMessage.contains("HTTP/1.1")) {
 
                     String[] arr = lineMessage.split(" ");
 
@@ -45,15 +45,12 @@ public class CCSThread implements  Runnable  {
                 }
 
                 if (lineMessage.contains("Content-Length")) {
-
                     request.setContentLength(Integer.parseInt(lineMessage.split(":")[1].trim()));
-
                 }
 
                 if(lineMessage.equals("")) {
-
-                    if (request.getMethod().equals("POST") && request.getContentLength() > 0) {
-
+                    // Support both POST and GET.
+                    if ( (request.getMethod().equals("POST") ||  request.getMethod().equals("GET") ) && request.getContentLength() > 0) {
                         char[] buf = new char[request.getContentLength()];
                         br.read(buf, 0, request.getContentLength());
 

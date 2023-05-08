@@ -4,22 +4,15 @@ import cn.ybits.protocols.http.HttpRequest;
 import cn.ybits.protocols.http.HttpResponse;
 import cn.ybits.server.ActionBase;
 import cn.ybits.server.IService;
-import cn.ybits.server.vo.LeaveApplication;
 import cn.ybits.server.vo.Student;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
-public class StudentList extends ActionBase implements IService {
-
+public class StudentQueryMgr extends ActionBase implements IService {
+    @Override
     public void doAction(HttpRequest request, HttpResponse response) {
-
         String[] searchValues = request.getParameters().split("&");
         String term = "";
         for (String searchValue : searchValues) {
@@ -34,7 +27,7 @@ public class StudentList extends ActionBase implements IService {
         for (int i = 0; i < 20; i++) {
             Student student = new Student();
             student.setId("898w74982387489823"+i);
-            student.setText("同学"+i);
+            student.setText("新同学"+i);
             studentList.add(student);
         }
 
@@ -50,12 +43,11 @@ public class StudentList extends ActionBase implements IService {
             jResult.put("results", students2);
         }
 
-
         jResult.put("pagination", JSONObject.parseObject("{\"more\": false}"));
 
         response.setPayload(jResult.toJSONString().getBytes());
 
-        response.setContentType("text/json");
+        response.setContentType("text/json; charset=UTF-8");
         response.setSuccessMessage();
     }
 }
