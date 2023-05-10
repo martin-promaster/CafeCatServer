@@ -8,9 +8,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DefaultDispatcher {
+public class CCSDefaultDispatcher {
 
-    public DefaultDispatcher() {
+    public CCSDefaultDispatcher() {
 
     }
 
@@ -27,16 +27,13 @@ public class DefaultDispatcher {
         String clazzName = actionMap.get(request.getPath());
 
         if (clazzName == null || clazzName.equals("")) {
-            clazzName = "cn.ybits.server.actions.DefaultAction";
+            clazzName = "cn.ybits.server.actions.NoMatchedRouteAction";
         }
 
         // Loading class
         try {
-
             Class<?> clazz = Class.forName(clazzName);
-
             IService defaultService = (IService)clazz.newInstance();
-
             defaultService.doAction(request, response);
 
         } catch (ClassNotFoundException e) {

@@ -2,7 +2,7 @@ package cn.ybits.server;
 
 import cn.ybits.protocols.http.HttpRequest;
 import cn.ybits.protocols.http.HttpResponse;
-import cn.ybits.server.dispatcher.DefaultDispatcher;
+import cn.ybits.server.dispatcher.CCSDefaultDispatcher;
 import org.apache.logging.log4j.*;
 
 import java.io.*;
@@ -64,7 +64,7 @@ public class CCSThread implements  Runnable  {
                 }
             }
 
-            DefaultDispatcher handler = new DefaultDispatcher();
+            CCSDefaultDispatcher handler = new CCSDefaultDispatcher();
 
             log.debug("\nReceived request is : "+request);
 

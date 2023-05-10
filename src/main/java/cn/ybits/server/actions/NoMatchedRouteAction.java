@@ -2,13 +2,12 @@ package cn.ybits.server.actions;
 
 import cn.ybits.protocols.http.HttpRequest;
 import cn.ybits.protocols.http.HttpResponse;
-import cn.ybits.server.ActionBase;
-import cn.ybits.server.CCSContext;
+import cn.ybits.server.CCSDefaultAction;
 import cn.ybits.server.IService;
 
 import java.io.*;
 
-public class DefaultAction extends ActionBase implements IService {
+public class NoMatchedRouteAction extends CCSDefaultAction implements IService {
 
 
     public void doAction(HttpRequest request, HttpResponse response) {

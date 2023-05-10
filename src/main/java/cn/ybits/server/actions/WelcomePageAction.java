@@ -3,13 +3,13 @@ package cn.ybits.server.actions;
 import cn.ybits.protocols.http.HttpRequest;
 import cn.ybits.protocols.http.HttpResponse;
 import cn.ybits.server.IService;
-import cn.ybits.server.ActionBase;
+import cn.ybits.server.CCSDefaultAction;
 
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class WelcomePageAction extends ActionBase implements IService {
+public class WelcomePageAction extends CCSDefaultAction implements IService {
 
     public void doAction(HttpRequest request, HttpResponse response) {
 

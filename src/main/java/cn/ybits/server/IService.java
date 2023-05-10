@@ -9,5 +9,4 @@ public interface IService {
     String WEB_APP = "articles";
 
     void doAction(HttpRequest request, HttpResponse response);
-
 }

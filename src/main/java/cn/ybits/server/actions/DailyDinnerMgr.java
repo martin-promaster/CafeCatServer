@@ -2,7 +2,7 @@ package cn.ybits.server.actions;
 
 import cn.ybits.protocols.http.HttpRequest;
 import cn.ybits.protocols.http.HttpResponse;
-import cn.ybits.server.ActionBase;
+import cn.ybits.server.CCSDefaultAction;
 import cn.ybits.server.IService;
 import cn.ybits.server.vo.LeaveApplication;
 import com.alibaba.fastjson.JSONArray;
@@ -10,7 +10,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.util.Date;
 
-public class DailyDinnerMgr extends ActionBase implements IService {
+public class DailyDinnerMgr extends CCSDefaultAction implements IService {
     @Override
     public void doAction(HttpRequest request, HttpResponse response) {
         JSONObject jsonData = new JSONObject();
