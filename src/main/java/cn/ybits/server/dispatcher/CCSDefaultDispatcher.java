@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CCSDefaultDispatcher {
-    private BufferedReader bufferedReader;
     private HttpResponse response;
     private HttpRequest request;
 
@@ -23,9 +22,8 @@ public class CCSDefaultDispatcher {
 
     public CCSDefaultDispatcher(InputStream is) {
         request = new HttpRequest();
-        response = new HttpResponse();
         try {
-            bufferedReader = new BufferedReader(new InputStreamReader(is));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
             while(true) {
 
                 String lineMessage = null;
@@ -75,15 +73,13 @@ public class CCSDefaultDispatcher {
         return this.response;
     }
 
-    public void dispatch(HttpRequest request, HttpResponse response) throws UnsupportedEncodingException {
-
+    public void dispatch() throws UnsupportedEncodingException {
+        response = new HttpResponse();
         Map<String, String> actionMap = new HashMap<String, String>();
 
         actionMap.put("/",                      "cn.ybits.server.actions.WelcomePageAction");
         actionMap.put("/apply/dinner/list",     "cn.ybits.busi.actions.DailyDinnerMgr");
         actionMap.put("/apply/student/list",    "cn.ybits.busi.actions.StudentQueryMgr");
-
-        System.out.println(request.getPath());
 
         String clazzName = actionMap.get(request.getPath());
 
@@ -94,9 +90,8 @@ public class CCSDefaultDispatcher {
         // Loading class
         try {
             Class<?> clazz = Class.forName(clazzName);
-            // IService defaultService = (IService)clazz.newInstance();
             CCSDefaultAction defaultAction = (CCSDefaultAction)clazz.newInstance();
-            // defaultAction.doAction(request, response);
+
             Method method = ReflectionUtils.getDeclaredMethod(defaultAction, "doAction", HttpRequest.class, HttpResponse.class);
             assert method != null;
             method.invoke(defaultAction, request, response);

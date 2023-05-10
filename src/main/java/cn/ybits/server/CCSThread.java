@@ -23,9 +23,10 @@ public class CCSThread implements  Runnable  {
 
         try {
             CCSDefaultDispatcher handler = new CCSDefaultDispatcher(socket.getInputStream());
-            log.debug("Received request is : "+ handler.getRequest().toString());
+            log.debug("Received TX is : "+ handler.getRequest().toString());
 
-            handler.dispatch(handler.getRequest(), handler.getResponse());
+            handler.dispatch();
+            log.debug("Returned RX is : "+ handler.getResponse().toString());
 
             socket.getOutputStream().write(handler.getResponse().getResponseMessage());
 
