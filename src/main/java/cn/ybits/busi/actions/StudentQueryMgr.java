@@ -53,6 +53,5 @@ public class StudentQueryMgr extends CCSDefaultAction implements IService {
         }
 
         response.setContentType("text/json; charset=UTF-8");
-        response.setSuccessMessage();
     }
 }

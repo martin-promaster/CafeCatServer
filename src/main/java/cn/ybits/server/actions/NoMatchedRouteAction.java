@@ -26,24 +26,11 @@ public class NoMatchedRouteAction extends CCSDefaultAction implements IService {
                 out.write(buf, 0, rt);
             }
 
-            response.setContentType("text/html");
-
-            if (request.getPath().endsWith(".js")) {
-                response.setContentType("application/json");
-            } else if (request.getPath().endsWith(".css")) {
-                response.setContentType("text/css");
-            } else if (request.getPath().endsWith(".woff")) {
-                response.setContentType("application/x-font-woff");
-            } else if (request.getPath().endsWith(".woff2")) {
-                response.setContentType("application/x-font-woff2");
-            }else if (request.getPath().endsWith(".ttf")) {
-                response.setContentType("application/x-font-truetype");
-            }
-
             response.setPayload(out.toByteArray());
-            response.setSuccessMessage();
+
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            response.setNotFoundMessage();
+            //e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

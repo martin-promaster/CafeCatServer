@@ -12,11 +12,13 @@ import org.apache.logging.log4j.core.time.Instant;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.SimpleFormatter;
+
 
 public class DailyDinnerMgr extends CCSDefaultAction implements IService {
     @Override
     public void doAction(HttpRequest request, HttpResponse response) {
+        System.out.println(request.getPath());
+
         JSONObject jsonData = new JSONObject();
 
         JSONArray jsonArray = new JSONArray();
@@ -42,6 +44,5 @@ public class DailyDinnerMgr extends CCSDefaultAction implements IService {
         }
 
         response.setContentType("text/json; charset=UTF-8");
-        response.setSuccessMessage();
     }
 }

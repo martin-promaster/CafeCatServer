@@ -7,6 +7,7 @@ import org.apache.logging.log4j.*;
 
 import java.io.*;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 
 public class CCSThread implements  Runnable  {
 
@@ -22,9 +23,8 @@ public class CCSThread implements  Runnable  {
 
         try {
 
+            // 1. Begin to process object of HttpRequest.
             HttpRequest request = new HttpRequest();
-            HttpResponse response = new HttpResponse();
-
             BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
             while(true) {
@@ -41,7 +41,6 @@ public class CCSThread implements  Runnable  {
                     request.setHttpVersion(arr[2]);
 
                     request.setContentLength(0);
-
                 }
 
                 if (lineMessage.contains("Content-Length")) {
@@ -55,7 +54,7 @@ public class CCSThread implements  Runnable  {
                         br.read(buf, 0, request.getContentLength());
 
                         String s = new String(buf);
-                        request.setRequestBody(s.getBytes("UTF-8"));
+                        request.setRequestBody(s.getBytes(StandardCharsets.UTF_8));
                     } else {
                         request.setRequestBody(null);
                     }
@@ -65,9 +64,10 @@ public class CCSThread implements  Runnable  {
             }
 
             CCSDefaultDispatcher handler = new CCSDefaultDispatcher();
-
             log.debug("\nReceived request is : "+request);
 
+            // 2. Begin to process object of HttpResponse.
+            HttpResponse response = new HttpResponse();
             handler.dispatch(request, response);
 
             // response message

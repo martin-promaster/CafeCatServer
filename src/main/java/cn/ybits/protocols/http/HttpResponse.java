@@ -2,6 +2,7 @@ package cn.ybits.protocols.http;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 public class HttpResponse {
 
@@ -43,23 +44,31 @@ public class HttpResponse {
     public void setSuccessMessage() {
         setResponseMessage(200);
     }
+
+    public void setNotFoundMessage() {
+        setResponseMessage(404);
+    }
+
+
     public void setFileNotFoundMessage() {
         setResponseMessage(404);
     }
 
     public void setResponseMessage(int statusCode) {
         try {
-            setContentLength(getPayload().length);
+            int contentLength = getPayload()==null?0:getPayload().length;
+            setContentLength(contentLength);
             setStatusCode(statusCode);
 
-            String responseHeader = "HTTP/1.1 "+ getStatusCode() +" OK\r\n" +
+            String responseHeader = "HTTP/1.1 "+ Status.valueOf(statusCode).status() +
                     "Server: Cafe Cat Server 0.9\r\n" +
                     "Content-Type: "+ getContentType() +"\r\n" +
                     "Content-Length: "+ getContentLength() +"\r\n\r\n";
 
-            out.write(responseHeader.getBytes("UTF-8"));
-            out.write(getPayload());
-
+            out.write(responseHeader.getBytes(StandardCharsets.UTF_8));
+            if (contentLength>0) {
+                out.write(getPayload());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
