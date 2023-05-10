@@ -19,8 +19,8 @@ public class CCSDefaultDispatcher {
         Map<String, String> actionMap = new HashMap<String, String>();
 
         actionMap.put("/",                      "cn.ybits.server.actions.WelcomePageAction");
-        actionMap.put("/apply/dinner/list",     "cn.ybits.server.actions.DailyDinnerMgr");
-        actionMap.put("/apply/student/list",    "cn.ybits.server.actions.StudentQueryMgr");
+        actionMap.put("/apply/dinner/list",     "cn.ybits.busi.actions.DailyDinnerMgr");
+        actionMap.put("/apply/student/list",    "cn.ybits.busi.actions.StudentQueryMgr");
 
         System.out.println(request.getPath());
 

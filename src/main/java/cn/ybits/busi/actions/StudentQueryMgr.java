@@ -1,4 +1,4 @@
-package cn.ybits.server.actions;
+package cn.ybits.busi.actions;
 
 import cn.ybits.protocols.http.HttpRequest;
 import cn.ybits.protocols.http.HttpResponse;
@@ -7,6 +7,7 @@ import cn.ybits.server.IService;
 import cn.ybits.server.vo.Student;
 import com.alibaba.fastjson.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +46,11 @@ public class StudentQueryMgr extends CCSDefaultAction implements IService {
 
         jResult.put("pagination", JSONObject.parseObject("{\"more\": false}"));
 
-        response.setPayload(jResult.toJSONString().getBytes());
+        try {
+            response.setPayload(jResult.toJSONString().getBytes("UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
 
         response.setContentType("text/json; charset=UTF-8");
         response.setSuccessMessage();
