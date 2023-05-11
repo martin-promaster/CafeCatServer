@@ -4,6 +4,7 @@ import cn.ybits.protocols.http.HttpRequest;
 import cn.ybits.protocols.http.HttpResponse;
 import cn.ybits.server.CCSDefaultAction;
 import cn.ybits.server.IService;
+import cn.ybits.server.annotation.ResponseBody;
 import cn.ybits.server.vo.Student;
 import com.alibaba.fastjson.JSONObject;
 
@@ -53,5 +54,10 @@ public class StudentQueryMgr extends CCSDefaultAction implements IService {
         }
 
         response.setContentType("text/json; charset=UTF-8");
+    }
+
+    @ResponseBody()
+    public void test(String s) {
+
     }
 }
