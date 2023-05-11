@@ -16,10 +16,9 @@ import java.util.Date;
 
 
 public class DailyDinnerMgr extends CCSDefaultAction implements IService {
-    @ResponseBody()
-    String testStr;
 
     @Override
+    @ResponseBody()
     public void doAction(HttpRequest request, HttpResponse response) {
         System.out.println(request.getPath());
 

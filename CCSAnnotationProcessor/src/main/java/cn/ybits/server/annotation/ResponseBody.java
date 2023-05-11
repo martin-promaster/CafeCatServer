@@ -5,8 +5,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
+
+@Retention(RetentionPolicy.SOURCE)
+@Target({ElementType.METHOD})
 public @interface ResponseBody {
-    int value() default 1;
+    String value() default "XXXXXX";
 }
