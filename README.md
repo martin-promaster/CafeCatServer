@@ -1,2 +1,17 @@
-# CafeCatServer
-A light-weight web service for RAPID building web application.
+# CafeCat Server
+
+## Introduction
+
+A light-weight web server application for RAPIDLY building web application.
+
+## How to start the server?
+
+Make sure that webroot is copied to ./out directory, because it is the place where web pages are placed.
+
+```shell
+mvn clean package
+java -jar ./out/CCSWebServer-1.0-SNAPSHOT.jar
+
+```
+
+
