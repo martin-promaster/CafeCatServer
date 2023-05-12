@@ -50,6 +50,7 @@ target/
 webroot/
 webroot/**/plugins/**
 logs/
+dependency-reduced-pom.xml
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
