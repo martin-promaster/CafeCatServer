@@ -1,5 +1,8 @@
 package cn.ybits.busi.actions;
 
+import cn.ybits.common.dbcp.SqlHelper;
+import cn.ybits.common.dbcp.SqlResultSet;
+import cn.ybits.common.dbcp.SqlStore;
 import cn.ybits.protocols.http.HttpRequest;
 import cn.ybits.protocols.http.HttpResponse;
 import cn.ybits.server.CCSDefaultAction;
@@ -10,12 +13,26 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class StudentQueryMgr extends CCSDefaultAction implements IService {
     @Override
     public void doAction(HttpRequest request, HttpResponse response) {
+
+        SqlStore sqlStore = new SqlStore();
+        sqlStore.createSqlHelper("mysql", "pms_db", "database.xml");
+        SqlResultSet rs = sqlStore.get("pms_db").doQuery("select * from sm_user;");
+        try {
+            while (rs.next()) {
+                System.out.println(rs.getString("USER_NAME"));
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+
         String[] searchValues = request.getParameters().split("&");
         String term = "";
         for (String searchValue : searchValues) {

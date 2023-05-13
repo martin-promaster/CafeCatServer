@@ -7,7 +7,7 @@
   <entry key="sql.mysql.url">localhost:3306</entry>
   <entry key="sql.mysql.schema">pms_db</entry>
   <entry key="sql.mysql.username">root</entry>
-  <entry key="sql.mysql.password">root@123</entry>
+  <entry key="sql.mysql.password">root@1234</entry>
   <entry key="sql.mysql.usessl">false</entry>
   <entry key="sql.mysql.autoreconnect">true</entry>
   

@@ -23,6 +23,7 @@ public class CCSContext {
     }
 
     public String getUserProfile() {
+        System.out.println("Path user.dir loaded: " + System.getProperty("user.dir"));
         return System.getProperty("user.dir");
     }
 }
