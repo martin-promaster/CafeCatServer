@@ -3,6 +3,7 @@ package cn.ybits.common.dbcp.impl;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -38,9 +39,8 @@ public class MySqlHelperFactory implements SqlHelperFactory {
 	private void init(String defaultConfigurationFile) {
 		try {
 			Properties p = new Properties();
-			URL databaseCfgUrl = Thread.currentThread().getContextClassLoader().getResource(defaultConfigurationFile);
-			assert databaseCfgUrl != null;
-			InputStream is = Files.newInputStream(Paths.get(databaseCfgUrl.toURI()));
+
+			InputStream is = Files.newInputStream(getResourcePath(defaultConfigurationFile));
 			p.loadFromXML(is);
 
 			String sql_type = p.getProperty(SQL_TYPE);
@@ -55,6 +55,12 @@ public class MySqlHelperFactory implements SqlHelperFactory {
 		} catch(IOException | NullPointerException | URISyntaxException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private Path getResourcePath(String resource) throws URISyntaxException {
+		URL resourceURL = Thread.currentThread().getContextClassLoader().getResource(resource);
+		assert resourceURL != null;
+		return Paths.get(resourceURL.toURI());
 	}
 
 	@Override
