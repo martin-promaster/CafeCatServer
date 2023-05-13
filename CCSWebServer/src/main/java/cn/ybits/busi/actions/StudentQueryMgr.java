@@ -9,6 +9,7 @@ import cn.ybits.server.vo.Student;
 import com.alibaba.fastjson.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,11 +48,7 @@ public class StudentQueryMgr extends CCSDefaultAction implements IService {
 
         jResult.put("pagination", JSONObject.parseObject("{\"more\": false}"));
 
-        try {
-            response.setPayload(jResult.toJSONString().getBytes("UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
+        response.setPayload(jResult.toJSONString().getBytes(StandardCharsets.UTF_8));
 
         response.setContentType("text/json; charset=UTF-8");
     }

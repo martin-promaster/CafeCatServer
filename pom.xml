@@ -11,6 +11,7 @@
 
     <modules>
         <module>CCSAnnotationProcessor</module>
+        <module>CCSDataService</module>
         <module>CCSWebServer</module>
     </modules>
 

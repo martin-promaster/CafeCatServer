@@ -1,7 +1,10 @@
 package cn.ybits.server;
 
+import cn.ybits.server.annotation.ResponseBody;
+
 import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
+import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
@@ -15,12 +18,12 @@ public class CCSResponseBodyAnnotationProcessor extends AbstractProcessor {
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         // ResponseBody
         Messager messager = processingEnv.getMessager();
-        for (TypeElement typeElement : annotations) {
-            System.out.println("getQualifiedName--" + typeElement.getQualifiedName());
-            System.out.println("Kind is: " + typeElement.getKind().toString());
-            if (typeElement.getKind() == ElementKind.ANNOTATION_TYPE) {
-                System.out.println("METHOD:Annotation Invoking.");
-                messager.printMessage(Diagnostic.Kind.NOTE, "printMessage:" + typeElement.toString());
+        for (Element element : roundEnv.getElementsAnnotatedWith(ResponseBody.class)) {
+            if (element.getKind() == ElementKind.METHOD) {
+                System.out.println("getQualifiedName--" + ((TypeElement)element.getEnclosingElement()).getQualifiedName());
+                System.out.println("Kind is: " + element.getKind().toString());
+                System.out.println("METHOD:process Invoking.");
+                messager.printMessage(Diagnostic.Kind.NOTE, "printMessage:" + element.toString());
             }
         }
         return false;

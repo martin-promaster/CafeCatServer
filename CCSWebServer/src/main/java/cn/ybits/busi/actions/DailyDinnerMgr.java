@@ -18,7 +18,6 @@ public class DailyDinnerMgr extends CCSDefaultAction implements IService {
 
     @Override
     public void doAction(HttpRequest request, HttpResponse response) {
-        System.out.println(request.getPath());
 
         JSONObject jsonData = new JSONObject();
 

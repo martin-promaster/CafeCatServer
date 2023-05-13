@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">  
+<properties>  
+  <comment>Default database configuration file</comment>  
+ 
+  <entry key="sql.connectiopool.size">5</entry>
+  <entry key="sql.mysql.url">60.205.163.222:3306</entry>
+  <entry key="sql.mysql.schema">idsm</entry>
+  <entry key="sql.mysql.username">idsm</entry>
+  <entry key="sql.mysql.password">idsmUSER123!</entry>
+  <entry key="sql.mysql.usessl">false</entry>
+  <entry key="sql.mysql.autoreconnect">true</entry>
+  
+</properties>  
