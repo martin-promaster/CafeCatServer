@@ -6,7 +6,7 @@ import cn.ybits.protocols.http.HttpRequest;
 import cn.ybits.protocols.http.HttpResponse;
 import cn.ybits.server.CCSDefaultAction;
 import cn.ybits.server.IService;
-import cn.ybits.server.annotation.ResponseBody;
+import cn.ybits.server.annotation.RequestPath;
 import cn.ybits.busi.vo.Student;
 import com.alibaba.fastjson.JSONObject;
 
@@ -55,7 +55,7 @@ public class StudentQueryMgr extends CCSDefaultAction implements IService {
         response.setContentType("text/json; charset=UTF-8");
     }
 
-    @ResponseBody(path = "/apply/student/list", className = "222")
+    @RequestPath(path = "/apply/student/list")
     public void test(String s) {
 
     }

@@ -74,12 +74,23 @@ public class CCSDefaultDispatcher {
     }
 
     public void dispatch() throws UnsupportedEncodingException {
+        Class<?> clazzCCSRequestMapping = null;
+        Map<String, String> actionMap;
+        try {
+            clazzCCSRequestMapping = Class.forName("cn.ybits.server.dispatcher.CCSRequestMapping");
+            cn.ybits.server.dispatcher.CCSRequestMapping ccsRequestMapping = (cn.ybits.server.dispatcher.CCSRequestMapping) clazzCCSRequestMapping.newInstance();
+            actionMap = new HashMap<String, String>(cn.ybits.server.dispatcher.CCSRequestMapping.map);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+
+
         response = new HttpResponse();
-        Map<String, String> actionMap = new HashMap<String, String>();
+
 
         actionMap.put("/",                      "cn.ybits.server.actions.WelcomePageAction");
-        actionMap.put("/apply/dinner/list",     "cn.ybits.busi.actions.DailyDinnerMgr");
-        actionMap.put("/apply/student/list",    "cn.ybits.busi.actions.StudentQueryMgr");
+//        actionMap.put("/apply/dinner/list",     "cn.ybits.busi.actions.DailyDinnerMgr");
+//        actionMap.put("/apply/student/list",    "cn.ybits.busi.actions.StudentQueryMgr");
 
         String clazzName = actionMap.get(request.getPath());
 
