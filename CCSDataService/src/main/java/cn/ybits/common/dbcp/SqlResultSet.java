@@ -6,10 +6,10 @@
  */
 package cn.ybits.common.dbcp;
 
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -216,7 +216,9 @@ public class SqlResultSet {
 	
 	public java.sql.Timestamp getTimestamp(int i)
 	{
-		return (java.sql.Timestamp)rows.get(currentRowNum).get(i);	
+		LocalDateTime localDateTime = (LocalDateTime)rows.get(currentRowNum).get(i);
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
+		return Timestamp.valueOf(localDateTime.format(dateTimeFormatter));
 	}
 
 	/**
@@ -241,12 +243,12 @@ public class SqlResultSet {
 	
 	public Date getDate(String sFieldName)
 	{
-		return (Date)rows.get(currentRowNum).get(getIndexByFieldName(sFieldName));
+		return getDate(getIndexByFieldName(sFieldName));
 	}
 	
 	public java.sql.Timestamp getTimestamp(String sFieldName)
 	{
-		return (java.sql.Timestamp)rows.get(currentRowNum).get(getIndexByFieldName(sFieldName));	
+		return getTimestamp(getIndexByFieldName(sFieldName));
 	}
 	
 	// Properties methods.

@@ -273,6 +273,9 @@
           data: "status",
         },
       ],
+      "createdRow": function (row, data, index) {
+        $('td', row).eq(3).html(new Date(data.leaveDate).toLocaleDateString());
+      },
     });
   });
 </script>

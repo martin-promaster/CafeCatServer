@@ -4,10 +4,10 @@
   <comment>Default database configuration file</comment>  
  
   <entry key="sql.connectiopool.size">5</entry>
-  <entry key="sql.mysql.url">localhost:3306</entry>
-  <entry key="sql.mysql.schema">pms_db</entry>
-  <entry key="sql.mysql.username">root</entry>
-  <entry key="sql.mysql.password">root@1234</entry>
+  <entry key="sql.mysql.url">rm-bp18m16y76g8d8ww2fo.mysql.rds.aliyuncs.com:6033</entry>
+  <entry key="sql.mysql.schema">yhtps_db</entry>
+  <entry key="sql.mysql.username">yhtps_user</entry>
+  <entry key="sql.mysql.password">Yhtps_user1</entry>
   <entry key="sql.mysql.usessl">false</entry>
   <entry key="sql.mysql.autoreconnect">true</entry>
   

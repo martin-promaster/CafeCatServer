@@ -1,14 +1,13 @@
-package cn.ybits.server.vo;
+package cn.ybits.busi.vo;
 
 import lombok.Data;
-
-import java.util.Date;
+import java.sql.Timestamp;
 
 @Data
 public class LeaveApplication {
     String id;
     String name;
     String leaveType;
-    Date leaveDate;
+    Timestamp leaveDate;
     String status;
 }

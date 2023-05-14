@@ -1,4 +1,4 @@
-package cn.ybits.server.vo;
+package cn.ybits.busi.vo;
 
 import lombok.Data;
 
