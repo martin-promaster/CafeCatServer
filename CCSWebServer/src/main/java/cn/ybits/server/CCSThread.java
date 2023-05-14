@@ -1,28 +1,27 @@
 package cn.ybits.server;
 
-import cn.ybits.protocols.http.HttpRequest;
-import cn.ybits.protocols.http.HttpResponse;
 import cn.ybits.server.dispatcher.CCSDefaultDispatcher;
 import org.apache.logging.log4j.*;
 
 import java.io.*;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 public class CCSThread implements  Runnable  {
 
     private final static Logger log = LogManager.getLogger(CCSThread.class);
-
     private final Socket socket;
+    private final Map<String, String> actionMap;
 
-    public CCSThread(Socket socket) {
+    public CCSThread(Socket socket, Map<String, String > actionMap) {
         this.socket = socket;
+        this.actionMap = actionMap;
     }
 
     public void run() {
 
         try {
-            CCSDefaultDispatcher handler = new CCSDefaultDispatcher(socket.getInputStream());
+            CCSDefaultDispatcher handler = new CCSDefaultDispatcher(socket.getInputStream(), actionMap);
             log.debug("Received TX is : "+ handler.getRequest().toString());
 
             handler.dispatch();

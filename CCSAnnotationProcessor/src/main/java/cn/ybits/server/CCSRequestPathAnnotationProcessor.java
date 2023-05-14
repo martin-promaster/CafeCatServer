@@ -23,7 +23,7 @@ public class CCSRequestPathAnnotationProcessor extends AbstractProcessor {
         boolean isMatch = false;
         Elements elements = processingEnv.getElementUtils();
         // Messager messager = processingEnv.getMessager();
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         TypeElement baseElement = null;
         for (Element element : roundEnv.getElementsAnnotatedWith(RequestPath.class)) {
             if (element.getKind() == ElementKind.METHOD) {
@@ -53,8 +53,9 @@ public class CCSRequestPathAnnotationProcessor extends AbstractProcessor {
                 // messager.printMessage(Diagnostic.Kind.NOTE, "printMessage:" + element.toString());
             }
         }
-        System.out.println("Begin to create Java class file...");
+
         if (isMatch) {
+            System.out.println("Begin to create Java class file ...");
             try {
                 JavaFileObject fileObject = processingEnv.getFiler().createSourceFile("CCSRequestMapping", baseElement);
                 Writer writer = fileObject.openWriter();
@@ -72,6 +73,8 @@ public class CCSRequestPathAnnotationProcessor extends AbstractProcessor {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        } else {
+            System.out.println("No matched class, skip ...");
         }
 
         return false;

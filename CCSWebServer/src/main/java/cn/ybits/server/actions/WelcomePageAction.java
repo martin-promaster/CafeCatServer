@@ -4,6 +4,7 @@ import cn.ybits.protocols.http.HttpRequest;
 import cn.ybits.protocols.http.HttpResponse;
 import cn.ybits.server.IService;
 import cn.ybits.server.CCSDefaultAction;
+import cn.ybits.server.annotation.RequestPath;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
@@ -12,6 +13,8 @@ import java.util.Date;
 
 public class WelcomePageAction extends CCSDefaultAction implements IService {
 
+    @Override
+    @RequestPath(path = "/")
     public void doAction(HttpRequest request, HttpResponse response) {
 
         StringBuilder sbResponseMessage = new StringBuilder();

@@ -19,6 +19,7 @@ import java.util.List;
 public class DailyDinnerMgr extends CCSDefaultAction implements IService {
 
     @Override
+    @RequestPath(path = "/apply/dinner/list")
     public void doAction(HttpRequest request, HttpResponse response) {
         List<LeaveApplication> leaveApplicationList = new ArrayList<>();
 
@@ -51,7 +52,7 @@ public class DailyDinnerMgr extends CCSDefaultAction implements IService {
         response.setContentType("text/json; charset=UTF-8");
     }
 
-    @RequestPath(path = "/apply/dinner/list")
+
     public void testResponseBody() {
 
     }

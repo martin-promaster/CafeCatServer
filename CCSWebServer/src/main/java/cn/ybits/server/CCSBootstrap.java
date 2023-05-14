@@ -5,6 +5,8 @@ import org.apache.logging.log4j.*;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -28,6 +30,15 @@ public class CCSBootstrap {
     }
 
     public void startServer() {
+        Class<?> clazzCCSRequestMapping = null;
+        Map<String, String> actionMap;
+        try {
+            clazzCCSRequestMapping = Class.forName("cn.ybits.server.dispatcher.CCSRequestMapping");
+            cn.ybits.server.dispatcher.CCSRequestMapping ccsRequestMapping = (cn.ybits.server.dispatcher.CCSRequestMapping) clazzCCSRequestMapping.newInstance();
+            actionMap = new HashMap<String, String>(cn.ybits.server.dispatcher.CCSRequestMapping.map);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
         try {
             try (ServerSocket serverSocket = new ServerSocket(port, backlog)) {
                 log.debug("CafeCat Server started successfully.");
@@ -36,7 +47,7 @@ public class CCSBootstrap {
                     final Socket socket = serverSocket.accept();
                     log.debug("Connection is established at: {},  Processing client request from: {}",
                             socket.getInetAddress(), socket.getRemoteSocketAddress());
-                    tpe.execute(new CCSThread(socket));
+                    tpe.execute(new CCSThread(socket, actionMap));
                 }
             }
         } catch (IOException e) {

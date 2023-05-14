@@ -9,26 +9,25 @@ import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 import java.util.Map;
 
 public class CCSDefaultDispatcher {
     private HttpResponse response;
     private HttpRequest request;
+    private Map<String,String> actionMap;
 
     public CCSDefaultDispatcher() {
 
     }
 
-    public CCSDefaultDispatcher(InputStream is) {
+    public CCSDefaultDispatcher(InputStream is, Map<String, String> actionMap) {
+        this.actionMap = actionMap;
         request = new HttpRequest();
         try {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
             while(true) {
 
-                String lineMessage = null;
-
-                lineMessage = bufferedReader.readLine();
+                String lineMessage = bufferedReader.readLine();
 
                 if (lineMessage.contains("HTTP/1.0") || lineMessage.contains("HTTP/1.1")) {
 
@@ -45,12 +44,11 @@ public class CCSDefaultDispatcher {
                     request.setContentLength(Integer.parseInt(lineMessage.split(":")[1].trim()));
                 }
 
-                if(lineMessage.equals("")) {
+                if (lineMessage.equals("")) {
                     // Support both POST and GET.
                     if ( (request.getMethod().equals("POST") ||  request.getMethod().equals("GET") ) && request.getContentLength() > 0) {
                         char[] buf = new char[request.getContentLength()];
                         bufferedReader.read(buf, 0, request.getContentLength());
-
                         String s = new String(buf);
                         request.setRequestBody(s.getBytes(StandardCharsets.UTF_8));
                     } else {
@@ -74,23 +72,8 @@ public class CCSDefaultDispatcher {
     }
 
     public void dispatch() throws UnsupportedEncodingException {
-        Class<?> clazzCCSRequestMapping = null;
-        Map<String, String> actionMap;
-        try {
-            clazzCCSRequestMapping = Class.forName("cn.ybits.server.dispatcher.CCSRequestMapping");
-            cn.ybits.server.dispatcher.CCSRequestMapping ccsRequestMapping = (cn.ybits.server.dispatcher.CCSRequestMapping) clazzCCSRequestMapping.newInstance();
-            actionMap = new HashMap<String, String>(cn.ybits.server.dispatcher.CCSRequestMapping.map);
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-
 
         response = new HttpResponse();
-
-
-        actionMap.put("/",                      "cn.ybits.server.actions.WelcomePageAction");
-//        actionMap.put("/apply/dinner/list",     "cn.ybits.busi.actions.DailyDinnerMgr");
-//        actionMap.put("/apply/student/list",    "cn.ybits.busi.actions.StudentQueryMgr");
 
         String clazzName = actionMap.get(request.getPath());
 

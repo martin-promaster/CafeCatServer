@@ -16,6 +16,7 @@ import java.util.List;
 
 public class StudentQueryMgr extends CCSDefaultAction implements IService {
     @Override
+    @RequestPath(path = "/apply/student/list")
     public void doAction(HttpRequest request, HttpResponse response) {
 
         String[] searchValues = request.getParameters().split("&");
@@ -55,7 +56,7 @@ public class StudentQueryMgr extends CCSDefaultAction implements IService {
         response.setContentType("text/json; charset=UTF-8");
     }
 
-    @RequestPath(path = "/apply/student/list")
+
     public void test(String s) {
 
     }
