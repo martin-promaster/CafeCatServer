@@ -22,7 +22,7 @@ public class CCSRequestPathAnnotationProcessor extends AbstractProcessor {
         System.out.println("Begin to scan annotation class...");
         boolean isMatch = false;
         Elements elements = processingEnv.getElementUtils();
-        Messager messager = processingEnv.getMessager();
+        // Messager messager = processingEnv.getMessager();
         StringBuffer sb = new StringBuffer();
         TypeElement baseElement = null;
         for (Element element : roundEnv.getElementsAnnotatedWith(RequestPath.class)) {
@@ -44,13 +44,13 @@ public class CCSRequestPathAnnotationProcessor extends AbstractProcessor {
 
                 sb.append("        map.put(\""+ pathValue +"\", \""+ fullClassName +"\");\n");
 
-                System.out.printf("Annotation: \nfullClassName is [%s] \npackageName is [%s], \nnewClassName is [%s]\n",
+                System.out.printf("Annotation:\n\tfullClassName is [%s],\n\tpackageName is [%s],\n\tnewClassName is [%s],\n",
                         fullClassName, packageName, newClassName);
-                System.out.printf("Annotation value: \npath is [%s], \nclassName is [%s].\n",
+                System.out.printf("Annotation value:\n\tpath is [%s],\n\tclassName is [%s].\n",
                         pathValue, fullClassName);
-                System.out.println("getQualifiedName -- " + ((TypeElement)element.getEnclosingElement()).getQualifiedName());
-                System.out.println("Kind is: " + element.getKind().toString());
-                messager.printMessage(Diagnostic.Kind.NOTE, "printMessage:" + element.toString());
+                System.out.println("\tgetQualifiedName -- " + ((TypeElement)element.getEnclosingElement()).getQualifiedName());
+                // System.out.println("\tKind is: " + element.getKind().toString());
+                // messager.printMessage(Diagnostic.Kind.NOTE, "printMessage:" + element.toString());
             }
         }
         System.out.println("Begin to create Java class file...");
