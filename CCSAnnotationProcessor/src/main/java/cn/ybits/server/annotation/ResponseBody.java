@@ -9,5 +9,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 @Target({ElementType.METHOD})
 public @interface ResponseBody {
-    String value() default "XXXXXX";
+    String value() default "value";
+    String path() default "PathValue";
+    String className() default "ClassName";
 }

@@ -55,7 +55,7 @@ public class StudentQueryMgr extends CCSDefaultAction implements IService {
         response.setContentType("text/json; charset=UTF-8");
     }
 
-    @ResponseBody()
+    @ResponseBody(path = "/apply/student/list", className = "222")
     public void test(String s) {
 
     }

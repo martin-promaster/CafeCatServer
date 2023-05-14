@@ -1,2 +1,2 @@
-cn.ybits.server.CCSAnnotationProcessor
+cn.ybits.server.CCSRequestMethodAnnotationProcessor
 cn.ybits.server.CCSResponseBodyAnnotationProcessor

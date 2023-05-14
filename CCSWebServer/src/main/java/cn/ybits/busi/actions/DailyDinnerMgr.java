@@ -7,6 +7,7 @@ import cn.ybits.protocols.http.HttpResponse;
 import cn.ybits.server.CCSDefaultAction;
 import cn.ybits.server.IService;
 import cn.ybits.busi.vo.LeaveApplication;
+import cn.ybits.server.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
@@ -51,5 +52,10 @@ public class DailyDinnerMgr extends CCSDefaultAction implements IService {
         response.setPayload(jsonData.toJSONString().getBytes(StandardCharsets.UTF_8));
 
         response.setContentType("text/json; charset=UTF-8");
+    }
+
+    @ResponseBody(path = "/apply/dinner/list", className = "111")
+    public void testResponseBody() {
+
     }
 }
