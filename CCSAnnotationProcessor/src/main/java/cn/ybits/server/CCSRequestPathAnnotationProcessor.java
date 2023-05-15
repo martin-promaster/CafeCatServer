@@ -19,7 +19,8 @@ public class CCSRequestPathAnnotationProcessor extends AbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         // ResponseBody
-        System.out.println("Begin to scan annotation class...");
+        System.out.println("----------------------------------------");
+        System.out.println("Step1: Begin to scan annotation class...");
         boolean isMatch = false;
         Elements elements = processingEnv.getElementUtils();
         // Messager messager = processingEnv.getMessager();
@@ -44,9 +45,9 @@ public class CCSRequestPathAnnotationProcessor extends AbstractProcessor {
 
                 sb.append("        map.put(\""+ pathValue +"\", \""+ fullClassName +"\");\n");
 
-                System.out.printf("Annotation:\n\tfullClassName is [%s],\n\tpackageName is [%s],\n\tnewClassName is [%s],\n",
-                        fullClassName, packageName, newClassName);
-                System.out.printf("Annotation value:\n\tpath is [%s],\n\tclassName is [%s].\n",
+                System.out.printf("    Annotation: [%s]\n\tfullClassName is [%s],\n\tpackageName is [%s],\n\tnewClassName is [%s],\n",
+                        fullClassName, fullClassName, packageName, newClassName);
+                System.out.printf("    Value injected:\n\tpath is [%s],\n\tclassName is [%s].\n",
                         pathValue, fullClassName);
                 System.out.println("\tgetQualifiedName -- " + ((TypeElement)element.getEnclosingElement()).getQualifiedName());
                 // System.out.println("\tKind is: " + element.getKind().toString());
@@ -55,7 +56,7 @@ public class CCSRequestPathAnnotationProcessor extends AbstractProcessor {
         }
 
         if (isMatch) {
-            System.out.println("Begin to create Java class file ...");
+            System.out.println("Step2: Begin to create Java class file ...");
             try {
                 JavaFileObject fileObject = processingEnv.getFiler().createSourceFile("CCSRequestMapping", baseElement);
                 Writer writer = fileObject.openWriter();
@@ -70,6 +71,7 @@ public class CCSRequestPathAnnotationProcessor extends AbstractProcessor {
                 writer.write("}\n");
                 writer.flush();
                 writer.close();
+                System.out.println("Java class file successfully created...");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
