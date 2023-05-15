@@ -3,6 +3,8 @@ package cn.ybits.protocols.http;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 public class HttpResponse {
 
@@ -62,6 +64,7 @@ public class HttpResponse {
 
             String responseHeader = "HTTP/1.1 "+ Status.valueOf(statusCode).status() +
                     "Server: Cafe Cat Server 0.9\r\n" +
+                    "Date: "+ LocalDateTime.now() +"\r\n" +
                     "Content-Type: "+ getContentType() +"\r\n" +
                     "Content-Length: "+ getContentLength() +"\r\n\r\n";
 

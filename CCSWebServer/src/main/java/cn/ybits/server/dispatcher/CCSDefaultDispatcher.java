@@ -86,14 +86,15 @@ public class CCSDefaultDispatcher {
             Class<?> clazz = Class.forName(clazzName);
             CCSDefaultAction defaultAction = (CCSDefaultAction)clazz.newInstance();
 
-            Method method = ReflectionUtils.getDeclaredMethod(defaultAction, "doAction", HttpRequest.class, HttpResponse.class);
+            Method method;
+
+            method = ReflectionUtils.getDeclaredMethod(defaultAction, "doAction", HttpRequest.class, HttpResponse.class);
             assert method != null;
             method.invoke(defaultAction, request, response);
 
             method = ReflectionUtils.getDeclaredMethod(defaultAction, "doPostProcess", HttpRequest.class, HttpResponse.class);
             assert method != null;
             method.invoke(defaultAction, request, response);
-
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException |
                  InvocationTargetException e) {
             e.printStackTrace();
