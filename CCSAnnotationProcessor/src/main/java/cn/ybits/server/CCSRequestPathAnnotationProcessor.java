@@ -64,7 +64,7 @@ public class CCSRequestPathAnnotationProcessor extends AbstractProcessor {
                 writer.write("import java.util.HashMap;\n");
                 writer.write("import java.util.Map;\n");
                 writer.write("public class " + "CCSRequestMapping" + " {\n");
-                writer.write("    public static Map<String, String> map = new HashMap();\n");
+                writer.write("    public static Map<String, String> map = new HashMap<String, String>();\n");
                 writer.write("    public CCSRequestMapping() {\n");
                 writer.write(sb.toString());
                 writer.write("    }\n");

@@ -60,6 +60,7 @@ public class MySqlHelperFactory implements SqlHelperFactory {
 	private Path getResourcePath(String resource) throws URISyntaxException {
 		URL resourceURL = Thread.currentThread().getContextClassLoader().getResource(resource);
 		assert resourceURL != null;
+		System.out.println(resourceURL.toString());
 		return Paths.get(resourceURL.toURI());
 	}
 
