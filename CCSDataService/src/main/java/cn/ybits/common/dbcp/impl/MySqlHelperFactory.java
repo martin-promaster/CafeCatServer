@@ -10,6 +10,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 import cn.ybits.common.dbcp.SqlHelperFactory;
 
@@ -40,7 +42,7 @@ public class MySqlHelperFactory implements SqlHelperFactory {
 		try {
 			Properties p = new Properties();
 
-			InputStream is = Files.newInputStream(getResourcePath(defaultConfigurationFile));
+			InputStream is = getResourcePath(defaultConfigurationFile);
 			p.loadFromXML(is);
 
 			String sql_type = p.getProperty(SQL_TYPE);
@@ -57,11 +59,19 @@ public class MySqlHelperFactory implements SqlHelperFactory {
 		}
 	}
 
-	private Path getResourcePath(String resource) throws URISyntaxException {
+	private InputStream getResourcePath(String resource) throws URISyntaxException, IOException {
 		URL resourceURL = Thread.currentThread().getContextClassLoader().getResource(resource);
 		assert resourceURL != null;
 		System.out.println(resourceURL.toString());
-		return Paths.get(resourceURL.toURI());
+		if (resourceURL.getProtocol().equals("jar")) {
+			System.out.println("Not supported now.");
+			try ( JarFile jarFile = new JarFile(resourceURL.toString()) ) {
+				JarEntry jarEntry = jarFile.getJarEntry("database.xml");
+				return jarFile.getInputStream(jarEntry);
+			}
+		} else {
+			return Files.newInputStream( Paths.get(resourceURL.toURI()) );
+		}
 	}
 
 	@Override
