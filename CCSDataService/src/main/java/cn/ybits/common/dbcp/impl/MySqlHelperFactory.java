@@ -64,8 +64,9 @@ public class MySqlHelperFactory implements SqlHelperFactory {
 		assert resourceURL != null;
 		System.out.println(resourceURL.toString());
 		if (resourceURL.getProtocol().equals("jar")) {
-			System.out.println("Not supported now.");
-			try ( JarFile jarFile = new JarFile(resourceURL.toString()) ) {
+			System.out.println("Not supported file protocol: jar:file:");
+			String jarFilePathStr = resourceURL.toString().split("!")[0];
+			try ( JarFile jarFile = new JarFile(jarFilePathStr) ) {
 				JarEntry jarEntry = jarFile.getJarEntry("database.xml");
 				return jarFile.getInputStream(jarEntry);
 			}
