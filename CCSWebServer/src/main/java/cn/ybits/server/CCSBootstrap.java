@@ -1,5 +1,6 @@
 package cn.ybits.server;
 
+import cn.ybits.common.dbcp.SqlStore;
 import org.apache.logging.log4j.*;
 
 import java.io.IOException;
@@ -39,6 +40,11 @@ public class CCSBootstrap {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+
+        SqlStore sqlStore = new SqlStore();
+        sqlStore.createSqlHelper("mysql", "pms_db", "database.xml");
+        CCSContext.getInstance().setSqlStore(sqlStore);
+
         try {
             try (ServerSocket serverSocket = new ServerSocket(port, backlog)) {
                 log.debug("CafeCat Server started successfully.");

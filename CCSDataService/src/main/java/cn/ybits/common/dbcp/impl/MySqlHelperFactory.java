@@ -1,19 +1,16 @@
 package cn.ybits.common.dbcp.impl;
 
-import java.io.FileInputStream;
+import cn.ybits.common.dbcp.SqlHelperFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-
-import cn.ybits.common.dbcp.SqlHelperFactory;
 
 public class MySqlHelperFactory implements SqlHelperFactory {
 	
@@ -26,7 +23,7 @@ public class MySqlHelperFactory implements SqlHelperFactory {
 	private static final String KEY_USE_SSL = "sql.mysql.usessl";
 	private static final String KEY_AUTO_RECONNECT = "sql.mysql.autoreconnect";
 
-	private int connectionpool_size = 10;
+	private int connection_pool_size = 10;
 	private String url = "";
 	private String schema = "";
 	private String username = "";
@@ -46,7 +43,7 @@ public class MySqlHelperFactory implements SqlHelperFactory {
 			p.loadFromXML(is);
 
 			String sql_type = p.getProperty(SQL_TYPE);
-			connectionpool_size = Integer.parseInt(p.getProperty(KEY_CONNECTION_POOL_SIZE));
+			connection_pool_size = Integer.parseInt(p.getProperty(KEY_CONNECTION_POOL_SIZE));
 			url = p.getProperty(KEY_URL);
 			schema = p.getProperty(KEY_SCHEMA);
 			username = p.getProperty(KEY_USERNAME);
@@ -78,7 +75,7 @@ public class MySqlHelperFactory implements SqlHelperFactory {
 	@Override
 	public int getConnectionPoolSize() {
 		// TODO Auto-generated method stub
-		return connectionpool_size;
+		return connection_pool_size;
 	}
 
 	@Override

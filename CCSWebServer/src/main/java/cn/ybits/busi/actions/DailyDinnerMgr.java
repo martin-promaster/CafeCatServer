@@ -4,6 +4,7 @@ import cn.ybits.common.dbcp.SqlResultSet;
 import cn.ybits.common.dbcp.SqlStore;
 import cn.ybits.protocols.http.HttpRequest;
 import cn.ybits.protocols.http.HttpResponse;
+import cn.ybits.server.CCSContext;
 import cn.ybits.server.CCSDefaultAction;
 import cn.ybits.server.IService;
 import cn.ybits.busi.vo.LeaveApplication;
@@ -24,9 +25,8 @@ public class DailyDinnerMgr extends CCSDefaultAction implements IService {
         List<LeaveApplication> leaveApplicationList = new ArrayList<>();
 
         try {
-            SqlStore sqlStore = new SqlStore();
-            sqlStore.createSqlHelper("mysql", "pms_db", "database.xml");
-            SqlResultSet rs = sqlStore.get("pms_db").doQuery("select * from inf_leave_application;");
+
+            SqlResultSet rs = CCSContext.getInstance().getSqlStore().get("pms_db").doQuery("select * from inf_leave_application;");
 
             while (rs.next()) {
                 LeaveApplication leaveApplication = new LeaveApplication();
