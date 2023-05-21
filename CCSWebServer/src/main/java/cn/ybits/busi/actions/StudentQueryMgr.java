@@ -4,6 +4,7 @@ import cn.ybits.common.dbcp.SqlResultSet;
 import cn.ybits.common.dbcp.SqlStore;
 import cn.ybits.protocols.http.HttpRequest;
 import cn.ybits.protocols.http.HttpResponse;
+import cn.ybits.server.CCSContext;
 import cn.ybits.server.CCSDefaultAction;
 import cn.ybits.server.IService;
 import cn.ybits.server.annotation.RequestPath;
@@ -29,11 +30,15 @@ public class StudentQueryMgr extends CCSDefaultAction implements IService {
 
         JSONObject jResult = new JSONObject();
 
+        SqlResultSet rs = CCSContext.getInstance().getSqlStore().get("pms_db").doQuery("select * from inf_student;");
+
         List<Student> studentList = new ArrayList<Student>();
-        for (int i = 0; i < 20; i++) {
+        while (rs.next()) {
             Student student = new Student();
-            student.setId("898w74982387489823"+i);
-            student.setText("新同学"+i);
+            student.setId(Integer.parseInt(rs.getString("code")));
+            student.setCode(rs.getString("code"));
+            student.setName(rs.getString("name"));
+            student.setText(student.getName());
             studentList.add(student);
         }
 
