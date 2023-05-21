@@ -19,16 +19,14 @@ public class CCSThread implements  Runnable  {
     }
 
     public void run() {
-
         try {
             CCSDefaultDispatcher handler = new CCSDefaultDispatcher(socket.getInputStream(), actionMap);
-            log.debug("Received TX is : "+ handler.getRequest().toString());
-
-            handler.dispatch();
-            log.debug("Returned RX is : "+ handler.getResponse().toString());
-
-            socket.getOutputStream().write(handler.getResponse().getResponseMessage());
-
+            if (null != handler.getRequest().getPath()) {
+                log.debug("Received TX is : "+ handler.getRequest().toString());
+                handler.dispatch();
+                log.debug("Returned RX is : "+ handler.getResponse().toString());
+                socket.getOutputStream().write(handler.getResponse().getResponseMessage());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

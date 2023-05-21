@@ -26,8 +26,10 @@ public class CCSDefaultDispatcher {
         try {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
             while(true) {
-
                 String lineMessage = bufferedReader.readLine();
+                if (null == lineMessage) {
+                    break;
+                }
 
                 if (lineMessage.contains("HTTP/1.0") || lineMessage.contains("HTTP/1.1")) {
 

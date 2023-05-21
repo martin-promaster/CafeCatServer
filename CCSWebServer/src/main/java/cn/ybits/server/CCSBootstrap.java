@@ -1,11 +1,13 @@
 package cn.ybits.server;
 
 import cn.ybits.common.dbcp.SqlStore;
+import org.apache.log4j.PropertyConfigurator;
 import org.apache.logging.log4j.*;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -14,8 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 
 public class CCSBootstrap {
-
-    private final static Logger log = LogManager.getLogger(CCSBootstrap.class);
+    Logger logger = LogManager.getLogger(CCSBootstrap.class);
 
     final static ArrayBlockingQueue<Runnable> arrayBlockingQueue = new ArrayBlockingQueue<Runnable>(50);
     final int corePoolSize = 100;
@@ -47,11 +48,11 @@ public class CCSBootstrap {
 
         try {
             try (ServerSocket serverSocket = new ServerSocket(port, backlog)) {
-                log.debug("CafeCat Server started successfully.");
+                logger.debug("CafeCat Server started successfully.");
                 while (true) {
-                    log.debug("Waiting for connections.");
+                    logger.debug("Waiting for connections.");
                     final Socket socket = serverSocket.accept();
-                    log.debug("Connection is established at: {},  Processing client request from: {}",
+                    logger.debug("Connection is established at: {},  Processing client request from: {}",
                             socket.getInetAddress(), socket.getRemoteSocketAddress());
                     tpe.execute(new CCSThread(socket, actionMap));
                 }

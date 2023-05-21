@@ -1,6 +1,8 @@
 package cn.ybits.common.dbcp.impl;
 
 import cn.ybits.common.dbcp.SqlHelperFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,6 +15,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class MySqlHelperFactory implements SqlHelperFactory {
+	Logger logger = LogManager.getLogger(MySqlHelperFactory.class);
 	
 	private static final String SQL_TYPE = "sql.type";
 	private static final String KEY_CONNECTION_POOL_SIZE = "sql.connectiopool.size";
@@ -59,11 +62,10 @@ public class MySqlHelperFactory implements SqlHelperFactory {
 	private InputStream getResourcePath(String resource) throws URISyntaxException, IOException {
 		URL resourceURL = Thread.currentThread().getContextClassLoader().getResource(resource);
 		assert resourceURL != null;
-		System.out.println(resourceURL.toString());
+		logger.debug("URL: "+resourceURL.toString());
 		if (resourceURL.getProtocol().equals("jar")) {
 			System.out.println("Not supported file protocol: jar:file:");
-			String jarFilePathStr = resourceURL.toString().split("!")[0];
-			try ( JarFile jarFile = new JarFile(jarFilePathStr) ) {
+			try ( JarFile jarFile = new JarFile(resourceURL.toString()) ) {
 				JarEntry jarEntry = jarFile.getJarEntry("database.xml");
 				return jarFile.getInputStream(jarEntry);
 			}
