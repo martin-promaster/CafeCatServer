@@ -1,12 +1,11 @@
 package cn.ybits.busi.actions;
 
 import cn.ybits.common.dbcp.SqlResultSet;
-import cn.ybits.common.dbcp.SqlStore;
 import cn.ybits.protocols.http.HttpRequest;
 import cn.ybits.protocols.http.HttpResponse;
-import cn.ybits.server.CCSContext;
-import cn.ybits.server.CCSDefaultAction;
-import cn.ybits.server.IService;
+import cn.ybits.server.utils.ContextUtils;
+import cn.ybits.server.actions.AbsRouteAction;
+import cn.ybits.server.intf.IService;
 import cn.ybits.busi.vo.LeaveApplication;
 import cn.ybits.server.annotation.RequestPath;
 import com.alibaba.fastjson.JSONObject;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DailyDinnerMgr extends CCSDefaultAction implements IService {
+public class DailyDinnerMgr extends AbsRouteAction implements IService {
 
     @Override
     @RequestPath(path = "/apply/dinner/list")
@@ -26,7 +25,7 @@ public class DailyDinnerMgr extends CCSDefaultAction implements IService {
 
         try {
 
-            SqlResultSet rs = CCSContext.getInstance().getSqlStore().get("pms_db").doQuery("select * from inf_leave_application;");
+            SqlResultSet rs = ContextUtils.getInstance().getSqlStore().get("pms_db").doQuery("select * from inf_leave_application;");
 
             while (rs.next()) {
                 LeaveApplication leaveApplication = new LeaveApplication();

@@ -1,13 +1,13 @@
-package cn.ybits.server;
+package cn.ybits.server.actions;
 
 import cn.ybits.protocols.http.HttpRequest;
 import cn.ybits.protocols.http.HttpResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public abstract class CCSDefaultAction {
+public abstract class AbsRouteAction {
 
-    private final static Logger log = LogManager.getLogger(CCSDefaultAction.class);
+    private final static Logger log = LogManager.getLogger(AbsRouteAction.class);
 
     public String formatJSON(String s) {
         return s.replace("\\", "\\\\").replace("\r", "\\r")

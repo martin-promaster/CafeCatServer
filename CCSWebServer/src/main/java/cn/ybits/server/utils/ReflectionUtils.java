@@ -1,4 +1,4 @@
-package cn.ybits.server;
+package cn.ybits.server.utils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

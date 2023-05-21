@@ -2,12 +2,11 @@ package cn.ybits.server.actions;
 
 import cn.ybits.protocols.http.HttpRequest;
 import cn.ybits.protocols.http.HttpResponse;
-import cn.ybits.server.CCSDefaultAction;
-import cn.ybits.server.IService;
+import cn.ybits.server.intf.IService;
 
 import java.io.*;
 
-public class NoMatchedRouteAction extends CCSDefaultAction implements IService {
+public class NoMatchedRouteAction extends AbsRouteAction implements IService {
 
 
     public void doAction(HttpRequest request, HttpResponse response) {
@@ -25,9 +24,8 @@ public class NoMatchedRouteAction extends CCSDefaultAction implements IService {
             while((rt = in.read(buf)) > 0) {
                 out.write(buf, 0, rt);
             }
-
             response.setPayload(out.toByteArray());
-
+            
         } catch (FileNotFoundException e) {
             response.setNotFoundMessage();
             //e.printStackTrace();

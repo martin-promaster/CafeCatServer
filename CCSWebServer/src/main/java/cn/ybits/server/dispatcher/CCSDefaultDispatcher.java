@@ -2,8 +2,8 @@ package cn.ybits.server.dispatcher;
 
 import cn.ybits.protocols.http.HttpRequest;
 import cn.ybits.protocols.http.HttpResponse;
-import cn.ybits.server.CCSDefaultAction;
-import cn.ybits.server.ReflectionUtils;
+import cn.ybits.server.actions.AbsRouteAction;
+import cn.ybits.server.utils.ReflectionUtils;
 import org.apache.logging.log4j.*;
 
 import java.io.*;
@@ -90,7 +90,7 @@ public class CCSDefaultDispatcher {
         // Loading class
         try {
             Class<?> clazz = Class.forName(clazzName);
-            CCSDefaultAction defaultAction = (CCSDefaultAction)clazz.newInstance();
+            AbsRouteAction defaultAction = (AbsRouteAction)clazz.newInstance();
             response = new HttpResponse();
             Method method;
             method = ReflectionUtils.getDeclaredMethod(defaultAction, "doAction", HttpRequest.class, HttpResponse.class);

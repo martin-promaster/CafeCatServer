@@ -1,12 +1,11 @@
 package cn.ybits.busi.actions;
 
 import cn.ybits.common.dbcp.SqlResultSet;
-import cn.ybits.common.dbcp.SqlStore;
 import cn.ybits.protocols.http.HttpRequest;
 import cn.ybits.protocols.http.HttpResponse;
-import cn.ybits.server.CCSContext;
-import cn.ybits.server.CCSDefaultAction;
-import cn.ybits.server.IService;
+import cn.ybits.server.utils.ContextUtils;
+import cn.ybits.server.actions.AbsRouteAction;
+import cn.ybits.server.intf.IService;
 import cn.ybits.server.annotation.RequestPath;
 import cn.ybits.busi.vo.Student;
 import com.alibaba.fastjson.JSONObject;
@@ -15,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentQueryMgr extends CCSDefaultAction implements IService {
+public class StudentQueryMgr extends AbsRouteAction implements IService {
     @Override
     @RequestPath(path = "/apply/student/list")
     public void doAction(HttpRequest request, HttpResponse response) {
@@ -30,7 +29,7 @@ public class StudentQueryMgr extends CCSDefaultAction implements IService {
 
         JSONObject jResult = new JSONObject();
 
-        SqlResultSet rs = CCSContext.getInstance().getSqlStore().get("pms_db").doQuery("select * from inf_student;");
+        SqlResultSet rs = ContextUtils.getInstance().getSqlStore().get("pms_db").doQuery("select * from inf_student;");
 
         List<Student> studentList = new ArrayList<Student>();
         while (rs.next()) {

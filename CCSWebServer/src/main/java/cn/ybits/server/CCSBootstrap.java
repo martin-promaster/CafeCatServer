@@ -1,6 +1,7 @@
 package cn.ybits.server;
 
 import cn.ybits.common.dbcp.SqlStore;
+import cn.ybits.server.utils.ContextUtils;
 import org.apache.logging.log4j.*;
 
 import java.io.IOException;
@@ -42,7 +43,7 @@ public class CCSBootstrap {
 
         SqlStore sqlStore = new SqlStore();
         sqlStore.createSqlHelper("mysql", "pms_db", "database.xml");
-        CCSContext.getInstance().setSqlStore(sqlStore);
+        ContextUtils.getInstance().setSqlStore(sqlStore);
 
         try {
             try (ServerSocket serverSocket = new ServerSocket(port, backlog)) {
