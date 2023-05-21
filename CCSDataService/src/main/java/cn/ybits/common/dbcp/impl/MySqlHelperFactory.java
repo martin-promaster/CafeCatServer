@@ -5,11 +5,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Enumeration;
 import java.util.Properties;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -40,10 +40,7 @@ public class MySqlHelperFactory implements SqlHelperFactory {
 	
 	private void init(String defaultConfigurationFile) {
 		try {
-			Properties p = new Properties();
-
-			InputStream is = getResourcePath(defaultConfigurationFile);
-			p.loadFromXML(is);
+			Properties p = getResourceFile(defaultConfigurationFile);
 
 			String sql_type = p.getProperty(SQL_TYPE);
 			connection_pool_size = Integer.parseInt(p.getProperty(KEY_CONNECTION_POOL_SIZE));
@@ -59,18 +56,36 @@ public class MySqlHelperFactory implements SqlHelperFactory {
 		}
 	}
 
-	private InputStream getResourcePath(String resource) throws URISyntaxException, IOException {
-		URL resourceURL = Thread.currentThread().getContextClassLoader().getResource(resource);
-		assert resourceURL != null;
-		logger.debug("URL: "+resourceURL.toString());
-		if (resourceURL.getProtocol().equals("jar")) {
-			System.out.println("Not supported file protocol: jar:file:");
-			try ( JarFile jarFile = new JarFile(resourceURL.toString()) ) {
+	private Properties getResourceFile(String resource) throws URISyntaxException, IOException {
+		Properties properties = new Properties();
+
+		// +
+		// Author: Martin Dong <martin.dong@139.com>
+		// Date: 2023-05-21
+		// Comment: Get the project configuration file, skip jar file configuration file.
+		URL resURL = null;
+		Enumeration<URL> es = this.getClass().getClassLoader().getResources(resource);
+		while ( es.hasMoreElements() ) {
+			resURL = es.nextElement();
+			logger.debug("this.getClass url: " + resURL);
+		}
+		// -
+
+		assert resURL != null;
+		logger.debug("Resource URL is "+resURL.toString());
+		if (resURL.getProtocol().equals("jar")) {
+			logger.debug("File protocol: jar:file:");
+			String jarFilePath = resURL.getPath().split("!")[0].replace("file:/", "");
+			logger.debug("File path:"+jarFilePath);
+			try ( JarFile jarFile = new JarFile(jarFilePath) ) {
 				JarEntry jarEntry = jarFile.getJarEntry("database.xml");
-				return jarFile.getInputStream(jarEntry);
+				logger.debug("File size:"+jarEntry.getSize());
+				properties.loadFromXML(jarFile.getInputStream(jarEntry));
+				return properties;
 			}
 		} else {
-			return Files.newInputStream( Paths.get(resourceURL.toURI()) );
+			properties.loadFromXML( Files.newInputStream( Paths.get(resURL.toURI())) );
+			return properties;
 		}
 	}
 
