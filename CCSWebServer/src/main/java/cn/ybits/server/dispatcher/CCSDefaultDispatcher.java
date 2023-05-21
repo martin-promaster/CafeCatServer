@@ -4,6 +4,7 @@ import cn.ybits.protocols.http.HttpRequest;
 import cn.ybits.protocols.http.HttpResponse;
 import cn.ybits.server.CCSDefaultAction;
 import cn.ybits.server.ReflectionUtils;
+import org.apache.logging.log4j.*;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
@@ -12,6 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 public class CCSDefaultDispatcher {
+    Logger logger = LogManager.getLogger(CCSDefaultDispatcher.class);
     private HttpResponse response;
     private HttpRequest request;
     private Map<String,String> actionMap;
@@ -32,13 +34,17 @@ public class CCSDefaultDispatcher {
                 }
 
                 if (lineMessage.contains("HTTP/1.0") || lineMessage.contains("HTTP/1.1")) {
-
                     String[] arr = lineMessage.split(" ");
-
                     request.setMethod(arr[0]);
-                    request.setPath(arr[1]);
+                    String path = arr[1];
+                    int idx = path.indexOf("?");
+                    if ( idx<0 ) {
+                        request.setPath(path);
+                    } else {
+                        request.setPath(path.substring(0, idx));
+                        request.setParameters(path.substring(idx));
+                    }
                     request.setHttpVersion(arr[2]);
-
                     request.setContentLength(0);
                 }
 
@@ -50,7 +56,8 @@ public class CCSDefaultDispatcher {
                     // Support both POST and GET.
                     if ( (request.getMethod().equals("POST") ||  request.getMethod().equals("GET") ) && request.getContentLength() > 0) {
                         char[] buf = new char[request.getContentLength()];
-                        bufferedReader.read(buf, 0, request.getContentLength());
+                        int receivedSize = bufferedReader.read(buf, 0, request.getContentLength());
+                        logger.debug(">>> Received buffer size: {}", receivedSize);
                         String s = new String(buf);
                         request.setRequestBody(s.getBytes(StandardCharsets.UTF_8));
                     } else {
@@ -75,10 +82,7 @@ public class CCSDefaultDispatcher {
 
     public void dispatch() throws UnsupportedEncodingException {
 
-        response = new HttpResponse();
-
         String clazzName = actionMap.get(request.getPath());
-
         if (clazzName == null || clazzName.equals("")) {
             clazzName = "cn.ybits.server.actions.NoMatchedRouteAction";
         }
@@ -87,13 +91,11 @@ public class CCSDefaultDispatcher {
         try {
             Class<?> clazz = Class.forName(clazzName);
             CCSDefaultAction defaultAction = (CCSDefaultAction)clazz.newInstance();
-
+            response = new HttpResponse();
             Method method;
-
             method = ReflectionUtils.getDeclaredMethod(defaultAction, "doAction", HttpRequest.class, HttpResponse.class);
             assert method != null;
             method.invoke(defaultAction, request, response);
-
             method = ReflectionUtils.getDeclaredMethod(defaultAction, "doPostProcess", HttpRequest.class, HttpResponse.class);
             assert method != null;
             method.invoke(defaultAction, request, response);

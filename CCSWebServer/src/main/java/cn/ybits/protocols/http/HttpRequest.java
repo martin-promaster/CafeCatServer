@@ -73,10 +73,10 @@ public class HttpRequest {
 
     public String toString() {
         return CCSConstant.CRLF
-                + "Method: "+ getMethod() + CCSConstant.CRLF
-                + "Path: " + getPath() + CCSConstant.CRLF
-                + "Parameters: "+ getParameters() + CCSConstant.CRLF
-                + "Version: " + getHttpVersion() + CCSConstant.CRLF;
+                + ">>> Method: "+ getMethod() + CCSConstant.CRLF
+                + ">>> Path: " + getPath() + CCSConstant.CRLF
+                + ">>> Parameters: "+ getParameters() + CCSConstant.CRLF
+                + ">>> Version: " + getHttpVersion();
     }
 
     public String getParameters() {

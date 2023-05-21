@@ -1,13 +1,11 @@
 package cn.ybits.server;
 
 import cn.ybits.common.dbcp.SqlStore;
-import org.apache.log4j.PropertyConfigurator;
 import org.apache.logging.log4j.*;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
