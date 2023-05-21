@@ -78,7 +78,7 @@ public class MySqlHelperFactory implements SqlHelperFactory {
 			String jarFilePath = resURL.getPath().split("!")[0].replace("file:/", "");
 			logger.debug("File path:"+jarFilePath);
 			try ( JarFile jarFile = new JarFile(jarFilePath) ) {
-				JarEntry jarEntry = jarFile.getJarEntry("database.xml");
+				JarEntry jarEntry = jarFile.getJarEntry(resource);
 				logger.debug("File size:"+jarEntry.getSize());
 				properties.loadFromXML(jarFile.getInputStream(jarEntry));
 				return properties;
