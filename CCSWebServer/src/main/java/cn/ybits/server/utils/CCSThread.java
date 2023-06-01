@@ -1,4 +1,4 @@
-package cn.ybits.server;
+package cn.ybits.server.utils;
 
 import cn.ybits.server.dispatcher.CCSDefaultDispatcher;
 import org.apache.logging.log4j.*;
