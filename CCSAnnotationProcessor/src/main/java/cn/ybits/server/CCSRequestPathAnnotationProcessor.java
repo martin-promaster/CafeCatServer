@@ -44,11 +44,10 @@ public class CCSRequestPathAnnotationProcessor extends AbstractProcessor {
 
                 sb.append("        map.put(\""+ pathValue +"\", \""+ fullClassName +"\");\n");
 
-                System.out.printf("    Annotation: [%s]\n\tfullClassName is [%s],\n\tpackageName is [%s],\n\tnewClassName is [%s],\n",
+                System.out.printf("\tAnnotation: [%s]\n\t-- fullClassName is [%s],\n\t-- packageName is [%s],\n\t-- newClassName is [%s],\n",
                         fullClassName, fullClassName, packageName, newClassName);
-                System.out.printf("    Value injected:\n\tpath is [%s],\n\tclassName is [%s].\n",
-                        pathValue, fullClassName);
-                System.out.println("\tgetQualifiedName -- " + ((TypeElement)element.getEnclosingElement()).getQualifiedName());
+                System.out.printf("\tValue injected:\n\t-- path is [%s],\n\t-- className is [%s].\n\t-- getQualifiedName %s]\n",
+                        pathValue, fullClassName, ((TypeElement)element.getEnclosingElement()).getQualifiedName());
                 // System.out.println("\tKind is: " + element.getKind().toString());
                 // messager.printMessage(Diagnostic.Kind.NOTE, "printMessage:" + element.toString());
             }
@@ -70,7 +69,7 @@ public class CCSRequestPathAnnotationProcessor extends AbstractProcessor {
                 writer.write("}\n");
                 writer.flush();
                 writer.close();
-                System.out.println("Java class file successfully created...");
+                System.out.println("Java class file successfully created ...");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
