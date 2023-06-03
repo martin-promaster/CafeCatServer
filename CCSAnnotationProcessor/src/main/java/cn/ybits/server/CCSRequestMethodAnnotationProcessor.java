@@ -11,6 +11,11 @@ import java.util.Set;
 public class CCSRequestMethodAnnotationProcessor extends AbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+        System.out.println("-------------------RequestMethod---------------------");
+        System.out.println("Step 0: Checking TypeElement");
+        for (TypeElement typeElement : annotations) {
+            System.out.println("QualifiedName: "+typeElement.getQualifiedName());
+        }
         boolean isMatch = false;
         Elements elements = processingEnv.getElementUtils();
         return false;

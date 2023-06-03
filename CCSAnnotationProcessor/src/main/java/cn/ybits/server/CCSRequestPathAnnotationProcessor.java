@@ -17,9 +17,12 @@ import java.util.Set;
 public class CCSRequestPathAnnotationProcessor extends AbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        // ResponseBody
-        System.out.println("----------------------------------------");
-        System.out.println("Step1: Begin to scan annotation class...");
+        System.out.println("-------------------RequestPath---------------------");
+        System.out.println("Step 0: Checking TypeElement");
+        for (TypeElement typeElement : annotations) {
+            System.out.println("QualifiedName: "+typeElement.getQualifiedName());
+        }
+        System.out.println("Step 1: Begin to scan annotation class...");
         boolean isMatch = false;
         Elements elements = processingEnv.getElementUtils();
         StringBuilder sb = new StringBuilder();
@@ -53,7 +56,7 @@ public class CCSRequestPathAnnotationProcessor extends AbstractProcessor {
         }
 
         if (isMatch) {
-            System.out.println("Step2: Begin to create Java class file ...");
+            System.out.println("Step 2: Begin to create Java class file ...");
             try {
                 JavaFileObject fileObject = processingEnv.getFiler().createSourceFile("CCSRequestMapping", baseElement);
                 Writer writer = fileObject.openWriter();

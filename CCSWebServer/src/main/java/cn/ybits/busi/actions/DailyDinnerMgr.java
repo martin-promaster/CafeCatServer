@@ -3,6 +3,7 @@ package cn.ybits.busi.actions;
 import cn.ybits.common.dbcp.SqlResultSet;
 import cn.ybits.protocols.http.HttpRequest;
 import cn.ybits.protocols.http.HttpResponse;
+import cn.ybits.server.annotation.RequestMethod;
 import cn.ybits.server.utils.ContextUtils;
 import cn.ybits.server.actions.AbsRouteAction;
 import cn.ybits.server.intf.IService;
@@ -51,7 +52,7 @@ public class DailyDinnerMgr extends AbsRouteAction implements IService {
         response.setContentType("text/json; charset=UTF-8");
     }
 
-
+    @RequestMethod("test")
     public void testResponseBody() {
 
     }
