@@ -22,7 +22,6 @@ public class CCSRequestPathAnnotationProcessor extends AbstractProcessor {
         System.out.println("Step1: Begin to scan annotation class...");
         boolean isMatch = false;
         Elements elements = processingEnv.getElementUtils();
-        // Messager messager = processingEnv.getMessager();
         StringBuilder sb = new StringBuilder();
         TypeElement baseElement = null;
         for (Element element : roundEnv.getElementsAnnotatedWith(RequestPath.class)) {
