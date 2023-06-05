@@ -6,12 +6,12 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 import java.util.Set;
 
-@SupportedAnnotationTypes({"cn.ybits.server.annotation.RequestMethod"})
+@SupportedAnnotationTypes({"cn.ybits.server.annotation.ResponseBody"})
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-public class CCSRequestMethodAnnotationProcessor extends AbstractProcessor {
+public class CCSResponseBodyAnnotationProcessor extends AbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        System.out.println("-------------------RequestMethod---------------------");
+        System.out.println("-------------------ResponseBody---------------------");
         System.out.println("Step 0: Checking TypeElement");
         for (TypeElement typeElement : annotations) {
             System.out.println("QualifiedName: "+typeElement.getQualifiedName());

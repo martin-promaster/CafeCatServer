@@ -3,12 +3,12 @@ package cn.ybits.busi.actions;
 import cn.ybits.common.dbcp.SqlResultSet;
 import cn.ybits.protocols.http.HttpRequest;
 import cn.ybits.protocols.http.HttpResponse;
-import cn.ybits.server.annotation.RequestMethod;
+import cn.ybits.server.annotation.RequestPath;
+import cn.ybits.server.annotation.ResponseBody;
 import cn.ybits.server.utils.ContextUtils;
 import cn.ybits.server.actions.AbsRouteAction;
 import cn.ybits.server.intf.IService;
 import cn.ybits.busi.vo.LeaveApplication;
-import cn.ybits.server.annotation.RequestPath;
 import com.alibaba.fastjson.JSONObject;
 
 import java.nio.charset.StandardCharsets;
@@ -52,7 +52,7 @@ public class DailyDinnerMgr extends AbsRouteAction implements IService {
         response.setContentType("text/json; charset=UTF-8");
     }
 
-    @RequestMethod("test")
+    @ResponseBody("test")
     public void testResponseBody() {
 
     }

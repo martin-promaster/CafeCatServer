@@ -8,6 +8,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.SOURCE)
 @Target({ElementType.METHOD})
-public @interface RequestMethod {
+public @interface ResponseBody {
     String value() default "value";
 }
