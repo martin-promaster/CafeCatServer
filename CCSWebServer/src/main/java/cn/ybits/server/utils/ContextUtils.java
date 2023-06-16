@@ -32,4 +32,17 @@ public class ContextUtils {
     public void setSqlStore(SqlStore sqlStore) {
         this.sqlStore = sqlStore;
     }
+
+    public String getFileSeparator() {
+        String osName = System.getProperty("os.name").toLowerCase();
+        String separator;
+        switch(osName) {
+            case "Windows":
+                separator = "\\";
+                break;
+            default: 
+                separator = "/";
+        }
+        return separator;
+    }
 }

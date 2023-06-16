@@ -75,7 +75,7 @@ public class MySqlHelperFactory implements SqlHelperFactory {
 		logger.debug("Resource URL is "+resURL.toString());
 		if (resURL.getProtocol().equals("jar")) {
 			logger.debug("File protocol: jar:file:");
-			String jarFilePath = resURL.getPath().split("!")[0].replace("file:/", "");
+			String jarFilePath = resURL.getPath().split("!")[0].replace("file:", "");
 			logger.debug("File path:"+jarFilePath);
 			try ( JarFile jarFile = new JarFile(jarFilePath) ) {
 				JarEntry jarEntry = jarFile.getJarEntry(resource);
