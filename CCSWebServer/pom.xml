@@ -51,7 +51,7 @@
             <artifactId>CCSDataService</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/../out/CCSDataService-1.0-SNAPSHOT.jaR</systemPath>
+            <systemPath>${project.basedir}/../out/CCSDataService-1.0-SNAPSHOT.jar</systemPath>
         </dependency>
     </dependencies>
     <build>
