@@ -10,8 +10,7 @@ Make sure that webroot is copied to ./out directory, because it is the place whe
 
 ```shell
 mvn clean package
-java -jar ./out/CCSWebServer-1.0-SNAPSHOT.jar
-
+./startup.sh
 ```
 
 
