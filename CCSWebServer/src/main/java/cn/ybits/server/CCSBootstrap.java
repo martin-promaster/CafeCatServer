@@ -50,7 +50,7 @@ public class CCSBootstrap {
             try (ServerSocket serverSocket = new ServerSocket(port, backlog)) {
                 logger.debug("CafeCat Server started successfully.");
                 while (true) {
-                    logger.debug("Waiting for connections.");
+                    logger.debug("Waiting for connections at port: {}", port);
                     final Socket socket = serverSocket.accept();
                     logger.debug("Connection is established at: {},  Processing client request from: {}",
                             socket.getInetAddress(), socket.getRemoteSocketAddress());

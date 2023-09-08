@@ -1,0 +1,1 @@
+java -classpath ".\out\CCSAnnotationProcessor-1.0-SNAPSHOT.jar;.\out\CCSDataService-1.0-SNAPSHOT.jar;.\out\CCSWebServer-1.0-SNAPSHOT.jar;D:\Toolkit\m2repo\org\apache\logging\log4j\log4j-api\2.20.0\log4j-api-2.20.0.jar;D:\Toolkit\m2repo\org\apache\logging\log4j\log4j-core\2.20.0\log4j-core-2.20.0.jar;" cn.ybits.server.CCSBootstrap
