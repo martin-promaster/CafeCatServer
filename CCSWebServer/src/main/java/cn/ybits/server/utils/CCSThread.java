@@ -1,7 +1,8 @@
 package cn.ybits.server.utils;
 
 import cn.ybits.server.dispatcher.CCSDefaultDispatcher;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import java.io.*;
 import java.net.Socket;
@@ -9,7 +10,7 @@ import java.util.Map;
 
 public class CCSThread implements  Runnable  {
 
-    private final static Logger log = LogManager.getLogger(CCSThread.class);
+    private static final Logger log = LogManager.getLogger(CCSThread.class);
     private final Socket socket;
     private final Map<String, String> actionMap;
 

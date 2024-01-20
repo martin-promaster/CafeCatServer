@@ -3,7 +3,8 @@ package cn.ybits.server;
 import cn.ybits.common.dbcp.SqlStore;
 import cn.ybits.server.utils.CCSThread;
 import cn.ybits.server.utils.ContextUtils;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -16,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 
 public class CCSBootstrap {
-    Logger logger = LogManager.getLogger(CCSBootstrap.class);
+    private static final Logger logger = LogManager.getLogger(CCSBootstrap.class);
 
     final static ArrayBlockingQueue<Runnable> arrayBlockingQueue = new ArrayBlockingQueue<Runnable>(50);
     final int corePoolSize = 100;

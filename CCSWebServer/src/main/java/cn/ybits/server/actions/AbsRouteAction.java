@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 public abstract class AbsRouteAction {
 
-    private final static Logger log = LogManager.getLogger(AbsRouteAction.class);
+    private static final Logger log = LogManager.getLogger(AbsRouteAction.class);
 
     public String formatJSON(String s) {
         return s.replace("\\", "\\\\").replace("\r", "\\r")

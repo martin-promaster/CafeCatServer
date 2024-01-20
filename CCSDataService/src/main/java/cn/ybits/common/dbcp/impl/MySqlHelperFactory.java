@@ -15,7 +15,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class MySqlHelperFactory implements SqlHelperFactory {
-	Logger logger = LogManager.getLogger(MySqlHelperFactory.class);
+	private static final Logger logger = LogManager.getLogger(MySqlHelperFactory.class);
 	
 	private static final String SQL_TYPE = "sql.type";
 	private static final String KEY_CONNECTION_POOL_SIZE = "sql.connectiopool.size";

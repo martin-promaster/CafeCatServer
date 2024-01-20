@@ -10,7 +10,7 @@ import java.io.*;
 
 public class NoMatchedRouteAction extends AbsRouteAction implements IService {
 
-    private final static Logger log = LogManager.getLogger(NoMatchedRouteAction.class);
+    private static final Logger log = LogManager.getLogger(NoMatchedRouteAction.class);
 
     public void doAction(HttpRequest request, HttpResponse response) {
          

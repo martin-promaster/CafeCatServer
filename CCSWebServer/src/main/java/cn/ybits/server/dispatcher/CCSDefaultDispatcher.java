@@ -4,7 +4,8 @@ import cn.ybits.protocols.http.HttpRequest;
 import cn.ybits.protocols.http.HttpResponse;
 import cn.ybits.server.actions.AbsRouteAction;
 import cn.ybits.server.utils.ReflectionUtils;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
@@ -13,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 public class CCSDefaultDispatcher {
-    Logger logger = LogManager.getLogger(CCSDefaultDispatcher.class);
+    private static final Logger logger = LogManager.getLogger(CCSDefaultDispatcher.class);
     private HttpResponse response;
     private HttpRequest request;
     private Map<String,String> actionMap;
